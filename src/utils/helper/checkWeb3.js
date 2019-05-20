@@ -19,7 +19,6 @@ export default class CheckWeb3 extends React.Component {
   }
 
   render () {
-    // not install metamask
     if (!this.state.isInjectWeb3) {
       return <MetaMask />
     }

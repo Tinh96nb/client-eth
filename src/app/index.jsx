@@ -4,34 +4,29 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
-import { Container, Row, Col } from 'react-bootstrap'
-import 'css/main.css'
-
-import NavBar from 'components/ui/NavBar'
-import CheckWeb3 from 'utils/helper/checkWeb3'
-
-import DocumentContainer from './document'
+import Layout from './layout'
+import SideBar from 'components/ui/SideBar'
+import RightSideBar from 'components/ui/RightSideBar'
+import DocumentContainer from './document/containers/DocContainer'
 
 class App extends Component {
   render () {
     return (
-      <CheckWeb3>
+      <Layout>
         <Router>
           <Fragment>
-            <NavBar />
-            <Container>
-              <Row className='wraper'>
-                <Col md={12}>
-                  <Switch>
-
-                    <Route component={() => (<p>Not Found</p>)} />
-                  </Switch>
-                </Col>
-              </Row>
-            </Container>
+            <SideBar />
+            <RightSideBar />
+            <div className='main col-xl-8 col-md-9 col-12'>
+              <Switch>
+                {/* <Route path='/' exact component={Index} /> */}
+                <Route path='/document/' component={DocumentContainer} />
+                <Route component={() => (<p>Not Found</p>)} />
+              </Switch>
+            </div>
           </Fragment>
         </Router>
-      </CheckWeb3>
+      </Layout>
     )
   }
 }

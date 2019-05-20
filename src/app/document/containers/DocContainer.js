@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Card, Button } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
+import { Heading } from 'components/common'
 
 class DocContainer extends Component {
   constructor (props) {
@@ -11,27 +12,27 @@ class DocContainer extends Component {
   }
   render () {
     return (
-      <Row className='mt-4'>
-        <Col md={12}>
-          <Card>
-            <Card.Header as='h5'>
+      <div>
+        <Heading text={document} />
+        <p>Here’s what you need to know before getting started with the Navbar:</p>
+        <Card>
+          <Card.Header as='h5'>
             List Document
-              <Button
-                onClick={() => this.setState({ isShowUpload: true })}
-                bsPrefix='btn btn-primary float-right'
-              >
+            <Button
+              onClick={() => this.setState({ isShowUpload: true })}
+              bsPrefix='btn btn-primary float-right'
+            >
                   Upload file
-              </Button>
-            </Card.Header>
-            <Card.Body>
-              {/* <ListDoc
+            </Button>
+          </Card.Header>
+          <Card.Body>
+            {/* <ListDoc
                 documents={documents}
                 getDocByIndex={this.props.getDocByIndex}
               /> */}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+          </Card.Body>
+        </Card>
+      </div>
     )
   }
 }
