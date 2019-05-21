@@ -15,7 +15,8 @@ module.exports = {
   entry: `${dir.app}/index.js`,
   output: {
     filename: 'app.js?v=[hash]',
-    path: dir.build
+    path: dir.build,
+    publicPath: '/'
   },
   module: {
     rules: [

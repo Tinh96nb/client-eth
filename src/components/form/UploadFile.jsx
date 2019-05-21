@@ -1,5 +1,4 @@
-import React from 'react';
-import { saveToIpfs } from 'utils/helper/ipfs';
+import React from 'react'
 
 class UploadFile extends React.Component {
   constructor () {
@@ -7,33 +6,34 @@ class UploadFile extends React.Component {
     this.state = {
       nameFile: null
     }
-    this.handleselectedFile = this.handleselectedFile.bind(this);
+    this.handleselectedFile = this.handleselectedFile.bind(this)
   }
 
-  async handleselectedFile(event) {
+  handleselectedFile (event) {
     event.stopPropagation()
     event.preventDefault()
-    const file = event.target.files[0];
-    this.setState({ nameFile: file.name})
+    const file = event.target.files[0]
+    this.setState({ nameFile: file.name })
     let reader = new window.FileReader()
-    reader.onload = async () => {
-      const result = await saveToIpfs(reader);
-      result['name'] = file.name;
-      this.props.getInfo(result);
-      this.setState({added_file_hash: result.path})
+    reader.onload = () => {
+      const result = {
+        base64: reader.result,
+        name: file.name
+      }
+      this.props.getInfo(result)
     }
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   }
 
   render () {
     return (
-      <div className="d-flex justify-content-center mb-3">
-        <div className="col col-md-4">
-          <input className="custom-file-input" type="file" onChange={this.handleselectedFile} />
-          <label className="custom-file-label">{this.state.nameFile ? this.state.nameFile: 'Choose file'}</label>
+      <div className='d-flex justify-content-center mb-3'>
+        <div className='col col-md-4'>
+          <input className='custom-file-input' type='file' onChange={this.handleselectedFile} />
+          <label className='custom-file-label'>{this.state.nameFile ? this.state.nameFile : 'Choose file'}</label>
         </div>
       </div>
     )
   }
 }
-export default UploadFile;
+export default UploadFile

@@ -36,7 +36,7 @@ class LayoutContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    app: state.app
+    profile: state.app.me
   }
 }
 

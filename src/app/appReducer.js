@@ -1,7 +1,6 @@
 import * as request from 'api/request_api'
 
 const FETCH_USER_ME = 'user/FETCH_USER_ME'
-const FETCH_SESSION = 'user/FETCH_SESSION'
 
 const initialState = {
   authChecked: false,
@@ -9,12 +8,8 @@ const initialState = {
 }
 
 export function postLogin (parameters, cb) {
-  return (dispatch) => request.postLogin(parameters)
+  return request.postLogin(parameters)
     .then((response) => {
-      dispatch({
-        type: FETCH_SESSION,
-        payload: { authChecked: true }
-      })
       return cb(response.data)
     })
     .catch((err) => {
@@ -27,7 +22,7 @@ export function getUserMe () {
     .then((response) => {
       dispatch({
         type: FETCH_USER_ME,
-        payload: { me: response.data.profile }
+        payload: { me: response.data.profile, authChecked: true }
       })
     })
 }
@@ -39,8 +34,7 @@ export const appReducer = (
   const { type, payload = {} } = action
   switch (type) {
     case FETCH_USER_ME:
-    case FETCH_SESSION:
-      return { ...payload }
+      return { ...state, ...payload }
     default:
       return state
   }

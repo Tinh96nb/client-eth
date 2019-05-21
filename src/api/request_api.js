@@ -115,3 +115,44 @@ export const postUserMe = function (parameters = {}) {
     getConfig(parameters)
   )
 }
+
+export const getListDocument = function (parameters = {}) {
+  let path = '/documents'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'GET',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
+
+export const getDocumentById = function (parameters = {}) {
+  let path = '/documents'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  if (parameters['id'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: id'))
+  }
+  if (parameters['id'] !== undefined) {
+    form['id'] = parameters['id']
+  }
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'GET',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}

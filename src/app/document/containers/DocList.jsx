@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Button } from 'react-bootstrap'
 import { Heading } from 'components/common'
+import { fetchDocument } from '../reducer'
 
+import ListDoc from '../components/ListDocument'
 class DocContainer extends Component {
   constructor (props) {
     super(props)
@@ -10,42 +11,32 @@ class DocContainer extends Component {
       isShowUpload: false
     }
   }
+
+  componentWillMount () {
+    this.props.fetchDocument()
+  }
   render () {
     return (
       <div>
         <Heading text={document} />
         <p>Here’s what you need to know before getting started with the Navbar:</p>
-        <Card>
-          <Card.Header as='h5'>
-            List Document
-            <Button
-              onClick={() => this.setState({ isShowUpload: true })}
-              bsPrefix='btn btn-primary float-right'
-            >
-                  Upload file
-            </Button>
-          </Card.Header>
-          <Card.Body>
-            {/* <ListDoc
-                documents={documents}
-                getDocByIndex={this.props.getDocByIndex}
-              /> */}
-          </Card.Body>
-        </Card>
+        <ListDoc
+          documents={this.props.documents}
+        />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => {
-  const { documents } = state.doc
   return {
-    documents
+    documents: state.doc.list
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchDocument: (params) => dispatch(fetchDocument(params))
   }
 }
 

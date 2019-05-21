@@ -21,7 +21,7 @@ export const fetchDocumentById = (params = {}) => {
       .then(response => {
         dispatch({
           type: FETCH_DETAIL_DOC,
-          payload: { one: response.data[0] }
+          payload: { one: response.data }
         })
       })
   }
