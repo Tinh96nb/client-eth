@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { asideMenu } from 'utils/helper/const'
+import { asideMenu } from 'common/helpers/const'
 
 export default class Aside extends React.Component {
   constructor (props) {

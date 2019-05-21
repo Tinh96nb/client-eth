@@ -19,7 +19,7 @@ class App extends Component {
             <RightSideBar />
             <div className='main col-xl-8 col-md-9 col-12'>
               <Switch>
-                {/* <Route path='/' exact component={Index} /> */}
+                {/* <Route path='/' exact component={<>} /> */}
                 <Route path='/document/' component={DocumentContainer} />
                 <Route component={() => (<p>Not Found</p>)} />
               </Switch>

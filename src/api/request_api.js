@@ -3,9 +3,7 @@ import * as qs from 'qs'
 import { assign, isEmpty } from 'lodash'
 import { has, get } from 'common/helpers/session'
 
-export const getDomain = parameters => {
-  return parameters.$domain ? parameters.$domain : process.env.API_ORIGIN
-}
+export const getDomain = 'http://localhost:3000'
 
 export const getConfig = parameters => {
   return parameters.$config ? parameters.$config : {}
@@ -46,7 +44,6 @@ export const request = (
   if (isEmpty(jsonBody) && isEmpty(form)) {
     mergedConfig = assign(defaultConfig, config)
   } else if (!isEmpty(jsonBody)) {
-    /* For raw POST, PUT */
     mergedConfig = assign(
       {
         data: jsonBody
@@ -64,6 +61,7 @@ export const request = (
       config
     )
   }
+
   return axios(queryUrl, mergedConfig)
 }
 
@@ -77,69 +75,40 @@ function mergeQueryParams (parameters, queryParameters) {
   return queryParameters
 }
 
-export const getCandidate = function (parameters = {}) {
-  let path = '/candidate'
+export const postLogin = function (parameters = {}) {
+  let path = '/login'
   let queryParameters = {}
   let jsonBody = {}
   let form = {}
-  if (parameters['name'] !== undefined) {
-    queryParameters['name'] = parameters['name']
-  }
 
-  if (parameters['email'] !== undefined) {
-    queryParameters['email'] = parameters['email']
+  if (parameters['address'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: address'))
   }
-
-  if (parameters['phone'] !== undefined) {
-    queryParameters['phone'] = parameters['phone']
-  }
-
-  if (parameters['position_id'] !== undefined) {
-    queryParameters['position_id'] = parameters['position_id']
-  }
-
-  if (parameters['position_name'] !== undefined) {
-    queryParameters['position_name'] = parameters['position_name']
-  }
-
-  if (parameters['unchecked_position_id'] !== undefined) {
-    queryParameters['unchecked_position_id'] =
-      parameters['unchecked_position_id']
-  }
-
-  if (parameters['unchecked_recruiter_owner'] !== undefined) {
-    queryParameters['unchecked_recruiter_owner'] =
-      parameters['unchecked_recruiter_owner']
-  }
-
-  if (parameters['recruiter_owner'] !== undefined) {
-    queryParameters['recruiter_owner'] = parameters['recruiter_owner']
-  }
-
-  if (parameters['is_blacklist'] !== undefined) {
-    queryParameters['is_blacklist'] = parameters['is_blacklist']
-  }
-
-  if (parameters['status'] !== undefined) {
-    queryParameters['status'] = parameters['status']
-  }
-
-  if (parameters['page'] !== undefined) {
-    queryParameters['page'] = parameters['page']
-  }
-
-  if (parameters['pageSize'] !== undefined) {
-    queryParameters['pageSize'] = parameters['pageSize']
-  }
-
-  if (parameters['sort'] !== undefined) {
-    queryParameters['sort'] = parameters['sort']
+  if (parameters['address'] !== undefined) {
+    form['address'] = parameters['address']
   }
 
   queryParameters = mergeQueryParams(parameters, queryParameters)
   return request(
-    'GET',
-    getDomain(parameters) + path,
+    'POST',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
+
+export const postUserMe = function (parameters = {}) {
+  let path = '/members/me'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'POST',
+    getDomain + path,
     queryParameters,
     jsonBody,
     form,

@@ -67,7 +67,7 @@ module.exports = {
       chunkFilename: '[id].css'
     }),
     new webpack.DefinePlugin({
-      API_ADDRESS: JSON.stringify('http://localhost:3003')
+      API_ADDRESS: JSON.stringify('http://localhost:3000')
     })
   ],
   resolve: {
