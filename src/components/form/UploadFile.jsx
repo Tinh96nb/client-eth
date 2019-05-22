@@ -18,7 +18,8 @@ class UploadFile extends React.Component {
     reader.onload = () => {
       const result = {
         base64: reader.result,
-        name: file.name
+        name: file.name,
+        size: file.size
       }
       this.props.getInfo(result)
     }
@@ -27,10 +28,15 @@ class UploadFile extends React.Component {
 
   render () {
     return (
-      <div className='d-flex justify-content-center mb-3'>
-        <div className='col col-md-4'>
-          <input className='custom-file-input' type='file' onChange={this.handleselectedFile} />
-          <label className='custom-file-label'>{this.state.nameFile ? this.state.nameFile : 'Choose file'}</label>
+      <div className='form-group'>
+        <label>Select file document
+        </label>
+        <span className='text-danger'>*</span>
+        <div className='d-flex justify-content-center'>
+          <div className='col col-md-7' style={{ cursor: 'pointer' }}>
+            <input className='custom-file-input' type='file' onChange={this.handleselectedFile} />
+            <label className='custom-file-label'>{this.state.nameFile ? this.state.nameFile : 'Choose file'}</label>
+          </div>
         </div>
       </div>
     )

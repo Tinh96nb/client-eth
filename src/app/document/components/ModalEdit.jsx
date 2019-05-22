@@ -5,12 +5,13 @@ import Input from 'components/form/Input'
 import Select from 'components/form/Select'
 import TextArea from 'components/form/TextArea'
 
-export default class ModalAdd extends Component {
+export default class ModalEdit extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
       document: {
+        id: 2,
         name: '',
         category: 1,
         file_content: '',
@@ -20,6 +21,7 @@ export default class ModalAdd extends Component {
 
       categories: [{ id: 1, name: 'Male' }]
     }
+
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.infoFileUpload = this.infoFileUpload.bind(this)
@@ -57,13 +59,14 @@ export default class ModalAdd extends Component {
     const cb = (res) => {
       this.handleClose()
     }
-    this.props.crateDocument(doc, cb)
+    this.props.updateDocument(doc, cb)
   }
 
   handleClose () {
     this.props.handleClose()
     this.setState({
       document: {
+        id: 0,
         name: '',
         category: 1,
         file_content: '',
@@ -78,10 +81,11 @@ export default class ModalAdd extends Component {
       <Modal
         show={this.props.isShowModal}
         onHide={this.handleClose}
+        onShow={() => this.setState({ document: this.props.document })}
       >
         <form onSubmit={this.handleFormSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>Create document</Modal.Title>
+            <Modal.Title>Update document</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <UploadFile getInfo={this.infoFileUpload} />

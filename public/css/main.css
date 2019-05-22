@@ -106,3 +106,9 @@ span {
   display: inline-block;
   padding-right: 1em;
 }
+.form-group .upload-input {
+  cursor: pointer;
+}
+.sweet-alert p span{
+  position: relative !important;
+}

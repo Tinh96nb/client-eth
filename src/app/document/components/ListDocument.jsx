@@ -1,13 +1,66 @@
 import React, { Component } from 'react'
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
+import SweetAlert from 'react-bootstrap-sweetalert'
 import { Link } from 'react-router-dom'
 import { convertTimeStampToString } from 'common/helpers/untils'
 
 export default class ListDoc extends Component {
   constructor (props) {
     super(props)
+    this.state = {
+      docSelecting: null,
+      isshowModalDel: false,
+      alertSuccess: ''
+    }
 
     this.renderTableDoc = this.renderTableDoc.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  handleDelete () {
+    const cb = (response) => {
+      if (response) {
+        this.setState({
+          alertSuccess: (
+            <SweetAlert success title=''
+              onConfirm={() => this.setState({ alertSuccess: null })}>
+            Product has been removed!
+            </SweetAlert>
+          ),
+          isshowModalDel: false
+        })
+      }
+    }
+    const params = {
+      id: this.state.docSelecting.u_id
+    }
+
+    this.props.deleteDocument(params, cb)
+  }
+
+  renderModal () {
+    return (
+      <>
+        {this.state.isshowModalDel
+          ? (<SweetAlert
+            warning
+            title='Are you sure?'
+            html
+            showCancel
+            confirmBtnText='Yes, delete it!'
+            cancelBtnBsStyle='default'
+            confirmBtnBsStyle='danger'
+            onConfirm={() => this.handleDelete()}
+            onCancel={() => this.setState({
+              idSelecting: null,
+              isshowModalDel: false
+            })}
+          />)
+          : null
+        }
+        {this.state.alertSuccess}
+      </>
+    )
   }
 
   renderTableDoc (documents) {
@@ -20,7 +73,7 @@ export default class ListDoc extends Component {
             <th>Hash Doc</th>
             <th>Owner</th>
             <th>Upload at</th>
-            <th>Action</th>
+            <th />
           </tr>
         </thead>
         <tbody>
@@ -36,6 +89,25 @@ export default class ListDoc extends Component {
                 <td>{doc.content_hash}</td>
                 <td>{doc.owner}</td>
                 <td>{convertTimeStampToString(doc.created_at)}</td>
+                <td>
+                  <Button
+                    variant='primary'
+                    size='sm'
+                    onClick={(e) => this.props.handleSelectDoc(doc)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant='danger'
+                    size='sm'
+                    onClick={(e) => this.setState({
+                      docSelecting: doc,
+                      isshowModalDel: true
+                    })}
+                  >
+                    Delete
+                  </Button>
+                </td>
               </tr>
             )
           })}
@@ -49,6 +121,7 @@ export default class ListDoc extends Component {
     return (
       <>
         {this.renderTableDoc(documents)}
+        {this.renderModal()}
       </>
     )
   }

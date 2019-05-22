@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Heading } from 'components/common'
-import { fetchDocument } from '../reducer'
+import {
+  fetchDocument,
+  crateDocument,
+  deleteDocument,
+  updateDocument
+} from '../reducer'
+import { Button } from 'react-bootstrap'
 
+import ModalAdd from '../components/ModalAdd'
+import ModalEdit from '../components/ModalEdit'
 import ListDoc from '../components/ListDocument'
+
 class DocContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isShowUpload: false
+      isShowModalAdd: false,
+      isShowModalUpdate: false,
+      docSelecting: null
     }
   }
 
@@ -19,9 +30,32 @@ class DocContainer extends Component {
     return (
       <div>
         <Heading text={document} />
+        <Button
+          variant='primary'
+          onClick={() => this.setState({ isShowModalAdd: true })}
+        >
+          Create
+        </Button>
         <p>Here’s what you need to know before getting started with the Navbar:</p>
+
         <ListDoc
           documents={this.props.documents}
+          deleteDocument={this.props.deleteDocument}
+          handleSelectDoc={(doc) =>
+            this.setState({ docSelecting: doc, isShowModalEdit: true })
+          }
+        />
+        <ModalAdd
+          isShowModal={this.state.isShowModalAdd}
+          crateDocument={this.props.crateDocument}
+          handleClose={() => this.setState({ isShowModalAdd: false })}
+
+        />
+        <ModalEdit
+          isShowModal={this.state.isShowModalEdit}
+          document={this.state.docSelecting}
+          updateDocument={this.props.updateDocument}
+          handleClose={() => this.setState({ isShowModalEdit: false })}
         />
       </div>
     )
@@ -36,7 +70,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchDocument: (params) => dispatch(fetchDocument(params))
+    fetchDocument: (params) => dispatch(fetchDocument(params)),
+    crateDocument: (params, cb) => dispatch(crateDocument(params, cb)),
+    deleteDocument: (params, cb) => dispatch(deleteDocument(params, cb)),
+    updateDocument: (params, cb) => dispatch(updateDocument(params, cb))
   }
 }
 
