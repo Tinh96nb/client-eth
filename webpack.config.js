@@ -37,8 +37,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
+        test: /\.(css|less|scss)$/,
         use: ['style-loader', 'css-loader']
       },
       {
@@ -48,6 +47,19 @@ module.exports = {
           loader: 'file-loader',
           options: {}
         }]
+      },
+      {
+        test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        exclude: /images/, /* dont want svg images from image folder to be included */
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'public/fonts/',
+              name: '[name][hash].[ext]'
+            }
+          }
+        ]
       }
     ]
   },

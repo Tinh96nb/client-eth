@@ -15,3 +15,10 @@ export const asideMenu = [
     name: 'Member'
   }
 ]
+
+export const statusDocument = {
+  1: { code: 1, status: 'PENDDING', class: 'danger' },
+  2: { code: 2, status: 'CLOSE', class: 'secondary' },
+  3: { code: 3, status: 'ACEPTED', class: 'success' },
+  4: { code: 4, status: 'REJECTED', class: 'dark' }
+}

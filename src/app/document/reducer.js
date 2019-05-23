@@ -64,7 +64,7 @@ export const updateDocument = (params = {}, cb = null) => {
     return request.updateDocument(params)
       .then(response => {
         const currentList = getState().doc.list
-        const index = currentList.findIndex((row) => row.id === response.id)
+        const index = currentList.findIndex((row) => row.u_id === response.data.u_id)
         currentList[index] = response.data
         dispatch({
           type: DELETE_DOC,

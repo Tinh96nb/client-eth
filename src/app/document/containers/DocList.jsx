@@ -48,12 +48,14 @@ class DocContainer extends Component {
         <ModalAdd
           isShowModal={this.state.isShowModalAdd}
           crateDocument={this.props.crateDocument}
+          categories={this.props.categories}
           handleClose={() => this.setState({ isShowModalAdd: false })}
 
         />
         <ModalEdit
           isShowModal={this.state.isShowModalEdit}
           document={this.state.docSelecting}
+          categories={this.props.categories}
           updateDocument={this.props.updateDocument}
           handleClose={() => this.setState({ isShowModalEdit: false })}
         />
@@ -64,7 +66,8 @@ class DocContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    documents: state.doc.list
+    documents: state.doc.list,
+    categories: state.app.categories
   }
 }
 

@@ -16,9 +16,7 @@ export default class ModalAdd extends Component {
         file_content: '',
         size: 0,
         description: ''
-      },
-
-      categories: [{ id: 1, name: 'Male' }]
+      }
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleInput = this.handleInput.bind(this)
@@ -96,7 +94,7 @@ export default class ModalAdd extends Component {
             <Select
               title={'Category'}
               name={'category'}
-              options={this.state.categories}
+              options={this.props.categories}
               value={this.state.document.category}
               placeholder={'Select category'}
               handleChange={this.handleInput}

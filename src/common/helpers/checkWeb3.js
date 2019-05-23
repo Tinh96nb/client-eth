@@ -11,7 +11,7 @@ export default class CheckWeb3 extends React.Component {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     const web3 = getWeb3()
     const response = (res) => {
       set(res.token)

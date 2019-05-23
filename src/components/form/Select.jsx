@@ -1,22 +1,32 @@
 import React from 'react'
 
 const Select = props => {
+  const {
+    title,
+    name,
+    value,
+    handleChange,
+    placeholder,
+    options = [],
+    selected = 1
+  } = props
   return (
     <div className='form-group'>
-      <label> {props.title} </label>
+      <label> {title} </label>
       <select
-        id={props.name}
-        name={props.name}
-        value={props.value}
-        onChange={props.handleChange}
+        id={name}
+        name={name}
+        value={value}
+        onChange={handleChange}
         className='form-control'
       >
         <option value='' disabled>
-          {props.placeholder}
+          {placeholder}
         </option>
-        {props.options.map(option => {
+        {options.map(option => {
           return (
             <option
+              selected={option.id === selected}
               key={option.id}
               value={option.id}
             >

@@ -4,6 +4,7 @@ import UploadFile from 'components/form/UploadFile'
 import Input from 'components/form/Input'
 import Select from 'components/form/Select'
 import TextArea from 'components/form/TextArea'
+import { createToast } from 'common/helpers/toast'
 
 export default class ModalEdit extends Component {
   constructor (props) {
@@ -11,15 +12,13 @@ export default class ModalEdit extends Component {
 
     this.state = {
       document: {
-        id: 2,
+        id: 0,
         name: '',
         category: 1,
         file_content: '',
         size: 0,
         description: ''
-      },
-
-      categories: [{ id: 1, name: 'Male' }]
+      }
     }
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -58,6 +57,7 @@ export default class ModalEdit extends Component {
     const doc = this.state.document
     const cb = (res) => {
       this.handleClose()
+      createToast({ type: 'success', message: 'Edit success document' })
     }
     this.props.updateDocument(doc, cb)
   }
@@ -100,8 +100,9 @@ export default class ModalEdit extends Component {
             <Select
               title={'Category'}
               name={'category'}
-              options={this.state.categories}
+              options={this.props.categories}
               value={this.state.document.category}
+              selected={this.state.document.category_id}
               placeholder={'Select category'}
               handleChange={this.handleInput}
             />

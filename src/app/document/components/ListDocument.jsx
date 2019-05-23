@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Table, Button } from 'react-bootstrap'
+import { Table, Button, Badge } from 'react-bootstrap'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import { Link } from 'react-router-dom'
 import { convertTimeStampToString } from 'common/helpers/untils'
+import { statusDocument } from 'common/helpers/const'
 
 export default class ListDoc extends Component {
   constructor (props) {
@@ -72,6 +73,7 @@ export default class ListDoc extends Component {
             <th>Name</th>
             <th>Hash Doc</th>
             <th>Owner</th>
+            <th>Status</th>
             <th>Upload at</th>
             <th />
           </tr>
@@ -88,6 +90,14 @@ export default class ListDoc extends Component {
                 </td>
                 <td>{doc.content_hash}</td>
                 <td>{doc.owner}</td>
+                <td>
+                  <Badge
+                    pill
+                    variant={statusDocument[1].class}
+                  >
+                    {statusDocument[1].status}
+                  </Badge>
+                </td>
                 <td>{convertTimeStampToString(doc.created_at)}</td>
                 <td>
                   <Button

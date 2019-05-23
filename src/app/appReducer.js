@@ -1,10 +1,12 @@
 import * as request from 'api/request_api'
 
 const FETCH_USER_ME = 'user/FETCH_USER_ME'
+const FETCH_CATEGORY = 'user/FETCH_CATEGORY'
 
 const initialState = {
   authChecked: false,
-  me: null
+  me: null,
+  categories: []
 }
 
 export function postLogin (parameters, cb) {
@@ -27,6 +29,16 @@ export function getUserMe () {
     })
 }
 
+export function getListCategory () {
+  return (dispatch) => request.getListCategory()
+    .then((response) => {
+      dispatch({
+        type: FETCH_CATEGORY,
+        payload: { categories: response.data }
+      })
+    })
+}
+
 export const appReducer = (
   state = initialState,
   action
@@ -34,6 +46,7 @@ export const appReducer = (
   const { type, payload = {} } = action
   switch (type) {
     case FETCH_USER_ME:
+    case FETCH_CATEGORY:
       return { ...state, ...payload }
     default:
       return state

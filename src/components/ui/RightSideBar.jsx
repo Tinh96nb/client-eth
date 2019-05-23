@@ -12,15 +12,21 @@ export default class RightSideBar extends React.Component {
   }
 
   render () {
+    const { categories = [] } = this.props
     return (
       <div className='d-none d-xl-block col-xl-2 right-sidebar'>
         <ul className='list-unstyled'>
-          <li level='2' className=' Toc-ListItem-module--list-item--3CS5U'>
-            <a href='#basic-example'>Basic Example</a>
-            <ul className='list-unstyled'><li level='3'
-              className=' Toc-ListItem-module--list-item--3CS5U'>
-              <a href='#active-items'>Active items</a><ul className='list-unstyled' />
-            </li>
+          <li level='2'>
+            <a href='#'>List Category</a>
+            <ul className='list-unstyled'>
+              {categories.map(cate => {
+                return (
+                  <li level='3' key={cate.id}>
+                    <Link to={`/document?category=${cate.name}`}>
+                      {cate.name} ({cate.num_doc})
+                    </Link>
+                  </li>)
+              })}
             </ul>
           </li>
         </ul></div>

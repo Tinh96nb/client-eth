@@ -259,3 +259,20 @@ export const updateDocument = function (parameters = {}) {
     getConfig(parameters)
   )
 }
+
+export const getListCategory = function (parameters = {}) {
+  let path = '/categories'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'GET',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}

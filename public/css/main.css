@@ -11,18 +11,9 @@ table {
 .wraper {
   position: relative;
 }
-.mining img {
-  position: absolute;
-  top: -15%;
-  right: 0;
-  width: 100px;
-}
-span {
-  font-size: 14px;
-  position: absolute;
-  top: -4%;
-  right: 19px;
-  color: rgba(255,255,255,.5);
+
+.custom-toast {
+  min-height: 50px !important;
 }
 .header {
   position: sticky;
@@ -90,6 +81,11 @@ span {
   display: block;
   padding: .125rem 1.5rem;
   color: rgba(26,26,26,.6);
+  text-decoration: unset;
+}
+.right-sidebar a:hover {
+  color: #007bff;
+  text-decoration: none;
 }
 .right-sidebar>ul ul {
   padding-left: 1rem;
