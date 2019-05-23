@@ -17,6 +17,7 @@ import { postLogin, getUserMe, getListCategory } from './appReducer'
 import Home from './home/containers/Home'
 import DocumentList from './document/containers/DocList'
 import DocumentDetail from './document/containers/DocDetail'
+import Member from './member/containers/Member'
 
 export class App extends Component {
   componentWillMount () {
@@ -47,6 +48,7 @@ export class App extends Component {
                       <Route path='/' exact component={Home} />
                       <Route path='/document/:id' component={DocumentDetail} />
                       <Route path='/document' component={DocumentList} />
+                      <Route path='/member' component={Member} />
                       <Route component={() => (<p>Not Found</p>)} />
                     </Switch>
                   </div>

@@ -276,3 +276,20 @@ export const getListCategory = function (parameters = {}) {
     getConfig(parameters)
   )
 }
+
+export const getListMember = function (parameters = {}) {
+  let path = '/members'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'GET',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}

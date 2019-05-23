@@ -93,9 +93,9 @@ export default class ListDoc extends Component {
                 <td>
                   <Badge
                     pill
-                    variant={statusDocument[1].class}
+                    variant={statusDocument[doc.status].class}
                   >
-                    {statusDocument[1].status}
+                    {statusDocument[doc.status].status}
                   </Badge>
                 </td>
                 <td>{convertTimeStampToString(doc.created_at)}</td>

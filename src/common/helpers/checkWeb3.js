@@ -11,12 +11,8 @@ export default class CheckWeb3 extends React.Component {
     }
   }
 
-  componentDidMount () {
-    const web3 = getWeb3()
-    const response = (res) => {
-      set(res.token)
-      this.props.getUserMe()
-    }
+  async componentDidMount () {
+    const web3 = await getWeb3()
     if (web3) {
       if (!web3.givenProvider.selectedAddress) {
         this.setState({ isInjectWeb3: false })
@@ -24,6 +20,10 @@ export default class CheckWeb3 extends React.Component {
       }
       const session = get()
       if (!session) {
+        const response = (res) => {
+          set(res.token)
+          this.props.getUserMe()
+        }
         this.props.postLogin({
           address: web3.givenProvider.selectedAddress
         }, response)
