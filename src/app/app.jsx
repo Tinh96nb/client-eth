@@ -18,6 +18,7 @@ import Home from './home/containers/Home'
 import DocumentList from './document/containers/DocList'
 import DocumentDetail from './document/containers/DocDetail'
 import Member from './member/containers/Member'
+import Profile from './profile/containers/Profile'
 
 export class App extends Component {
   componentWillMount () {
@@ -49,6 +50,7 @@ export class App extends Component {
                       <Route path='/document/:id' component={DocumentDetail} />
                       <Route path='/document' component={DocumentList} />
                       <Route path='/member' component={Member} />
+                      <Route path='/profile' component={Profile} />
                       <Route component={() => (<p>Not Found</p>)} />
                     </Switch>
                   </div>
@@ -74,9 +76,9 @@ const mapDispatchToProps = (dispatch) => {
     postLogin: (params, cb) => dispatch(postLogin(params, cb)),
     getUserMe: (params) => dispatch(getUserMe(params)),
     getListCategory: (params) => dispatch(getListCategory(params))
-
   }
 }
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

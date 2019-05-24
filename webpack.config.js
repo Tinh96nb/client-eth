@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const webpack = require('webpack')
+const Dotenv = require('dotenv-webpack')
 
 const basePath = path.resolve(__dirname)
 
@@ -79,9 +79,7 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css'
     }),
-    new webpack.DefinePlugin({
-      API_ADDRESS: JSON.stringify('http://localhost:3000')
-    })
+    new Dotenv()
   ],
   resolve: {
     modules: [dir.app, dir.public, 'node_modules'],

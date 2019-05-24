@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Table, Badge } from 'react-bootstrap'
 import { statusMember } from 'common/helpers/const'
 import { fetchListMember } from '../reducer'
+import { convertTimeStampToString } from 'common/utils'
 
 class MemberContainer extends Component {
   constructor (props) {
@@ -41,7 +42,7 @@ class MemberContainer extends Component {
                   </Link>
                 </td>
                 <td>{mem.balance}</td>
-                <td>{mem.created_at}</td>
+                <td>{convertTimeStampToString(mem.created_at)}</td>
                 <td>
                   <Badge
                     pill

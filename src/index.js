@@ -12,7 +12,7 @@ import { createStore, applyMiddleware } from 'redux'
 
 import rootReducer from './reducers'
 
-import App from './app'
+import App from './app/app'
 
 const middleware = applyMiddleware(thunk)
 const store = createStore(rootReducer, middleware)

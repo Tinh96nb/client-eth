@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap'
-import { convertTimeStampToString } from 'common/helpers/untils'
+import { convertTimeStampToString } from 'common/utils'
 import { Heading } from 'components/common'
 import { get } from 'common/helpers/session'
 import { fetchDocumentById } from '../reducer'
@@ -24,7 +24,7 @@ class DocDetailContainer extends Component {
 
   handeDownloadfile (id) {
     const token = get()
-    const link = `http://localhost:3000/documents/file/${id}?access_token=${token}`
+    const link = `${process.env.API_ORIGIN}/documents/file/${id}?access_token=${token}`
     return (
       <a href={link} target='blank'>Download</a>
     )

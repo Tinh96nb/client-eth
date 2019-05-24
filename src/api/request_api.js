@@ -3,7 +3,7 @@ import * as qs from 'qs'
 import { assign, isEmpty } from 'lodash'
 import { has, get } from 'common/helpers/session'
 
-export const getDomain = 'http://localhost:3000'
+export const getDomain = process.env.API_ORIGIN || 'http://localhost:3000'
 
 export const getConfig = parameters => {
   return parameters.$config ? parameters.$config : {}
@@ -121,6 +121,16 @@ export const getListDocument = function (parameters = {}) {
   let queryParameters = {}
   let jsonBody = {}
   let form = {}
+
+  if (parameters['name'] !== undefined) {
+    queryParameters['name'] = parameters['name']
+  }
+  if (parameters['category_id'] !== undefined) {
+    queryParameters['categoryId'] = parameters['category_id']
+  }
+  if (parameters['owner'] !== undefined) {
+    queryParameters['owner'] = parameters['owner']
+  }
 
   queryParameters = mergeQueryParams(parameters, queryParameters)
   return request(

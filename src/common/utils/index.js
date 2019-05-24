@@ -15,7 +15,15 @@ export function convertTimeStampToString (timestamp) {
   return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2) + ' ' + ddmmyy
 }
 
-export function getUrlParams () {
-  const path = window.location.pathname
-  return path
-};
+export const getUrlParams = () => {
+  const search = window.location.search
+  if (!search.trim().length) return {}
+  const hashes = search.slice(search.indexOf('?') + 1).split('&')
+  const params = {}
+  hashes.map((hash) => {
+    const [ key, val ] = hash.split('=')
+    params[key] = decodeURIComponent(val)
+  })
+
+  return params
+}
