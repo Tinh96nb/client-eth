@@ -12,13 +12,17 @@ import Header from 'components/ui/Header'
 import SideBar from 'components/ui/SideBar'
 import RightSideBar from 'components/ui/RightSideBar'
 
-import { postLogin, getUserMe, getListCategory } from './appReducer'
+import { postLogin, getUserMe } from './appReducer'
+import { fetchListCategory } from './admin/reducer'
 
 import Home from './home/containers/Home'
 import DocumentList from './document/containers/DocList'
 import DocumentDetail from './document/containers/DocDetail'
 import Member from './member/containers/Member'
 import Profile from './profile/containers/Profile'
+// admin
+import CategoryManager from './admin/containers/Category'
+import DocManager from './admin/containers/Document'
 
 export class App extends Component {
   componentWillMount () {
@@ -51,6 +55,9 @@ export class App extends Component {
                       <Route path='/document' component={DocumentList} />
                       <Route path='/member' component={Member} />
                       <Route path='/profile' component={Profile} />
+
+                      <Route path='/admin/category' component={CategoryManager} />
+                      <Route path='/admin/document' component={DocManager} />
                       <Route component={() => (<p>Not Found</p>)} />
                     </Switch>
                   </div>
@@ -67,7 +74,7 @@ export class App extends Component {
 const mapStateToProps = (state) => {
   return {
     profile: state.app.me,
-    categories: state.app.categories
+    categories: state.admin.categories
   }
 }
 
@@ -75,7 +82,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     postLogin: (params, cb) => dispatch(postLogin(params, cb)),
     getUserMe: (params) => dispatch(getUserMe(params)),
-    getListCategory: (params) => dispatch(getListCategory(params))
+    getListCategory: (params) => dispatch(fetchListCategory(params))
   }
 }
 

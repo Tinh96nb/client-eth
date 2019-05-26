@@ -193,6 +193,36 @@ export const deleteDocumentById = function (parameters = {}) {
   )
 }
 
+export const updateStatusDocument = function (parameters = {}) {
+  let path = '/documents/change-status'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  if (parameters['id'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: id'))
+  }
+  if (parameters['id'] !== undefined) {
+    form['id'] = parameters['id']
+  }
+  if (parameters['status'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: status'))
+  }
+  if (parameters['status'] !== undefined) {
+    form['status'] = parameters['status']
+  }
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'POST',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
+
 export const crateDocument = function (parameters = {}) {
   let path = '/documents'
   let queryParameters = {}
@@ -235,11 +265,11 @@ export const updateDocument = function (parameters = {}) {
   let jsonBody = {}
   let form = {}
 
-  if (parameters['u_id'] === undefined) {
-    return Promise.reject(new Error('Missing required parameter: u_id'))
+  if (parameters['id'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: id'))
   }
-  if (parameters['u_id'] !== undefined) {
-    form['u_id'] = parameters['u_id']
+  if (parameters['id'] !== undefined) {
+    form['id'] = parameters['id']
   }
   if (parameters['name'] !== undefined) {
     form['name'] = parameters['name']
@@ -257,7 +287,7 @@ export const updateDocument = function (parameters = {}) {
     form['description'] = parameters['description']
   }
 
-  path = path.replace('{id}', parameters['u_id'])
+  path = path.replace('{id}', parameters['id'])
 
   queryParameters = mergeQueryParams(parameters, queryParameters)
   return request(
@@ -286,6 +316,83 @@ export const getListCategory = function (parameters = {}) {
     getConfig(parameters)
   )
 }
+export const deleteCategoryById = function (parameters = {}) {
+  let path = '/admin/categories/{id}'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  if (parameters['id'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: id'))
+  }
+  if (parameters['id'] !== undefined) {
+    form['id'] = parameters['id']
+  }
+  path = path.replace('{id}', parameters['id'])
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'DELETE',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
+
+export const createCategory = function (parameters = {}) {
+  let path = '/admin/categories'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  if (parameters['name'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: name'))
+  }
+  if (parameters['name'] !== undefined) {
+    form['name'] = parameters['name']
+  }
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'POST',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
+
+export const updateCategory = function (parameters = {}) {
+  let path = '/admin/categories/{id}'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  if (parameters['id'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: id'))
+  }
+  if (parameters['id'] !== undefined) {
+    form['id'] = parameters['id']
+  }
+  if (parameters['name'] !== undefined) {
+    form['name'] = parameters['name']
+  }
+
+  path = path.replace('{id}', parameters['id'])
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'PUT',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
 
 export const getListMember = function (parameters = {}) {
   let path = '/members'
@@ -296,6 +403,36 @@ export const getListMember = function (parameters = {}) {
   queryParameters = mergeQueryParams(parameters, queryParameters)
   return request(
     'GET',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
+
+export const adminUpdateStatusDocument = function (parameters = {}) {
+  let path = '/admin/document/change-status'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  if (parameters['id'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: id'))
+  }
+  if (parameters['id'] !== undefined) {
+    form['id'] = parameters['id']
+  }
+  if (parameters['status'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: status'))
+  }
+  if (parameters['status'] !== undefined) {
+    form['status'] = parameters['status']
+  }
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'POST',
     getDomain + path,
     queryParameters,
     jsonBody,

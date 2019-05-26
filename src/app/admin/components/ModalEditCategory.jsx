@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Modal } from 'react-bootstrap'
-import UploadFile from 'components/form/UploadFile'
 import Input from 'components/form/Input'
-import Select from 'components/form/Select'
-import TextArea from 'components/form/TextArea'
 import { createToast } from 'common/helpers/toast'
 
 export default class ModalEdit extends Component {
@@ -11,33 +8,15 @@ export default class ModalEdit extends Component {
     super(props)
 
     this.state = {
-      document: {
+      category: {
         id: 0,
-        name: '',
-        category: 1,
-        file_content: '',
-        size: 0,
-        description: ''
+        name: ''
       }
     }
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleInput = this.handleInput.bind(this)
-    this.infoFileUpload = this.infoFileUpload.bind(this)
     this.handleClose = this.handleClose.bind(this)
-  }
-
-  infoFileUpload (result) {
-    this.setState(
-      prevState => ({
-        document: {
-          ...prevState.document,
-          name: result.name,
-          file_content: result.base64,
-          size: result.size
-        }
-      })
-    )
   }
 
   handleInput (e) {
@@ -45,8 +24,8 @@ export default class ModalEdit extends Component {
     let name = e.target.name
     this.setState(
       prevState => ({
-        document: {
-          ...prevState.document,
+        category: {
+          ...prevState.category,
           [name]: value
         }
       })
@@ -54,24 +33,20 @@ export default class ModalEdit extends Component {
   }
   handleFormSubmit (e) {
     e.preventDefault()
-    const doc = this.state.document
+    const category = this.state.category
     const cb = (res) => {
       this.handleClose()
       createToast({ type: 'success', message: 'Edit success document' })
     }
-    this.props.updateDocument(doc, cb)
+    this.props.updateCategory(category, cb)
   }
 
   handleClose () {
     this.props.handleClose()
     this.setState({
-      document: {
+      category: {
         id: 0,
-        name: '',
-        category: 1,
-        file_content: '',
-        size: 0,
-        description: ''
+        name: ''
       }
     })
   }
@@ -81,38 +56,20 @@ export default class ModalEdit extends Component {
       <Modal
         show={this.props.isShowModal}
         onHide={this.handleClose}
-        onShow={() => this.setState({ document: this.props.document })}
+        onShow={() => this.setState({ category: this.props.category })}
       >
         <form onSubmit={this.handleFormSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>Update document</Modal.Title>
+            <Modal.Title>Update category</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <UploadFile getInfo={this.infoFileUpload} />
             <Input
               type={'text'}
-              title={'Document Name'}
+              title={'Category Name'}
               name={'name'}
-              value={this.state.document.name}
+              value={this.state.category.name}
               placeholder={'Enter name'}
               handleChange={this.handleInput}
-            />
-            <Select
-              title={'Category'}
-              name={'category'}
-              options={this.props.categories}
-              value={this.state.document.category}
-              selected={this.state.document.category_id}
-              placeholder={'Select category'}
-              handleChange={this.handleInput}
-            />
-            <TextArea
-              title={'Description'}
-              rows={4}
-              value={this.state.document.description}
-              name={'description'}
-              handleChange={this.handleInput}
-              placeholder={'Enter some thing description for document'}
             />
           </Modal.Body>
           <Modal.Footer>

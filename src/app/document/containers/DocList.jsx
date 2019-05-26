@@ -3,23 +3,17 @@ import { connect } from 'react-redux'
 import { Heading } from 'components/common'
 import {
   fetchDocument,
-  crateDocument,
-  deleteDocument,
-  updateDocument
+  crateDocument
 } from '../reducer'
 import { Button } from 'react-bootstrap'
-
 import ModalAdd from '../components/ModalAdd'
-import ModalEdit from '../components/ModalEdit'
 import ListDoc from '../components/ListDocument'
 
 class DocContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isShowModalAdd: false,
-      isShowModalUpdate: false,
-      docSelecting: null
+      isShowModalAdd: false
     }
   }
 
@@ -41,23 +35,14 @@ class DocContainer extends Component {
         <ListDoc
           documents={this.props.documents}
           deleteDocument={this.props.deleteDocument}
-          handleSelectDoc={(doc) =>
-            this.setState({ docSelecting: doc, isShowModalEdit: true })
-          }
         />
+
         <ModalAdd
           isShowModal={this.state.isShowModalAdd}
           crateDocument={this.props.crateDocument}
           categories={this.props.categories}
           handleClose={() => this.setState({ isShowModalAdd: false })}
 
-        />
-        <ModalEdit
-          isShowModal={this.state.isShowModalEdit}
-          document={this.state.docSelecting}
-          categories={this.props.categories}
-          updateDocument={this.props.updateDocument}
-          handleClose={() => this.setState({ isShowModalEdit: false })}
         />
       </div>
     )
@@ -74,9 +59,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchDocument: (params) => dispatch(fetchDocument(params)),
-    crateDocument: (params, cb) => dispatch(crateDocument(params, cb)),
-    deleteDocument: (params, cb) => dispatch(deleteDocument(params, cb)),
-    updateDocument: (params, cb) => dispatch(updateDocument(params, cb))
+    crateDocument: (params, cb) => dispatch(crateDocument(params, cb))
   }
 }
 

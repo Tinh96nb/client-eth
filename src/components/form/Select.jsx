@@ -26,7 +26,6 @@ const Select = props => {
         {options.map(option => {
           return (
             <option
-              selected={option.id === selected}
               key={option.id}
               value={option.id}
             >

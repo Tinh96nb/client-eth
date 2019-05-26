@@ -1,7 +1,12 @@
 import * as request from 'api/request_api'
 
-const FETCH_LIST_DOC = 'doc/FETCH_LIST_DOC'
-const FETCH_DETAIL_DOC = 'doc/FETCH_DETAIL_DOC'
+const FETCH_LIST_CATEGORY = 'admin/FETCH_LIST_CATEGORY'
+const FETCH_DETAIL_CATEGORY = 'admin/FETCH_DETAIL_CATEGORY'
+const CREATE_CATEGORY = 'admin/CREATE_CATEGORY'
+const DELETE_CATEGORY = 'admin/DELETE_CATEGORY'
+
+const FETCH_LIST_DOC = 'admin/FETCH_LIST_DOC'
+const UPDATE_STATUS_DOC = 'admin/UPDATE_STATUS_DOC'
 
 export const fetchDocument = (params = {}) => {
   return (dispatch) => {
@@ -9,33 +14,93 @@ export const fetchDocument = (params = {}) => {
       .then(response => {
         dispatch({
           type: FETCH_LIST_DOC,
-          payload: { list: response.data }
+          payload: { documents: response.data }
+        })
+      })
+  }
+}
+export const updateStatusDoc = (params = {}, cb = null) => {
+  return (dispatch, getState) => {
+    return request.adminUpdateStatusDocument(params)
+      .then(response => {
+        dispatch(fetchDocument())
+        return cb && cb(response.data)
+      })
+  }
+}
+
+export const fetchListCategory = (params = {}) => {
+  return (dispatch) => {
+    return request.getListCategory(params)
+      .then(response => {
+        dispatch({
+          type: FETCH_LIST_CATEGORY,
+          payload: { categories: response.data }
         })
       })
   }
 }
 
-export const fetchDocumentById = (params = {}) => {
-  return (dispatch) => {
-    return request.getDocumentById(params)
+export const createCategory = (params = {}, cb = null) => {
+  return (dispatch, getState) => {
+    return request.createCategory(params)
       .then(response => {
+        const currentList = getState().admin.categories
+        const newList = [...[response.data], ...currentList]
         dispatch({
-          type: FETCH_DETAIL_DOC,
-          payload: { one: response.data }
+          type: CREATE_CATEGORY,
+          payload: { categories: newList }
         })
+        return cb && cb(response.data)
+      })
+  }
+}
+
+export const deleteCategory = (params = {}, cb = null) => {
+  return (dispatch, getState) => {
+    return request.deleteCategoryById(params)
+      .then(response => {
+        const currentList = getState().admin.categories
+        const newList = currentList.filter((row) => row.id !== parseInt(response.data), 10)
+        dispatch({
+          type: DELETE_CATEGORY,
+          payload: { categories: newList }
+        })
+        return cb && cb(response.data)
+      })
+  }
+}
+
+export const updateCategory = (params = {}, cb = null) => {
+  return (dispatch, getState) => {
+    return request.updateCategory(params)
+      .then(response => {
+        const currentList = getState().admin.categories
+        const index = currentList.findIndex((row) => row.id === response.data.id)
+        currentList[index] = response.data
+        dispatch({
+          type: DELETE_CATEGORY,
+          payload: { categories: currentList }
+        })
+        return cb && cb(response.data)
       })
   }
 }
 
 const initState = {
-  list: [],
-  one: {}
+  documents: [],
+  categories: [],
+  members: []
 }
 
-export const docReducer = (state = initState, action) => {
+export const adminReducer = (state = initState, action) => {
   switch (action.type) {
+    case FETCH_LIST_CATEGORY:
+    case FETCH_DETAIL_CATEGORY:
+    case CREATE_CATEGORY:
+    case DELETE_CATEGORY:
     case FETCH_LIST_DOC:
-    case FETCH_DETAIL_DOC:
+    case UPDATE_STATUS_DOC:
       return { ...state, ...action.payload }
     default:
       return state

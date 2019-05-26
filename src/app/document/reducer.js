@@ -49,7 +49,7 @@ export const deleteDocument = (params = {}, cb = null) => {
     return request.deleteDocumentById(params)
       .then(response => {
         const currentList = getState().doc.list
-        const newList = currentList.filter((row) => row.u_id !== response.data)
+        const newList = currentList.filter((row) => row.id !== response.data)
         dispatch({
           type: DELETE_DOC,
           payload: { list: newList }
@@ -64,7 +64,7 @@ export const updateDocument = (params = {}, cb = null) => {
     return request.updateDocument(params)
       .then(response => {
         const currentList = getState().doc.list
-        const index = currentList.findIndex((row) => row.u_id === response.data.u_id)
+        const index = currentList.findIndex((row) => row.id === response.data.id)
         currentList[index] = response.data
         dispatch({
           type: DELETE_DOC,

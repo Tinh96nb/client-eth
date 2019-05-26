@@ -49,14 +49,14 @@ class DocDetailContainer extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>{document.u_id}</td>
+                <td>{document.id}</td>
                 <td>
                   {document.name}
                 </td>
                 <td>{document.content_hash}</td>
                 <td>{document.owner}</td>
                 <td>{convertTimeStampToString(document.created_at)}</td>
-                <td>{this.handeDownloadfile(document.u_id)}</td>
+                <td>{this.handeDownloadfile(document.id)}</td>
               </tr>
             </tbody>
           </Table>

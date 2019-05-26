@@ -4,6 +4,7 @@ const FETCH_LIST_DOC = 'profile/FETCH_LIST_DOC'
 const FETCH_DETAIL_DOC = 'profile/FETCH_DETAIL_DOC'
 const CREATE_DOC = 'profile/CREATE_DOC'
 const DELETE_DOC = 'profile/DELETE_DOC'
+const UPDATE_STATUS_DOC = 'profile/UPDATE_STATUS_DOC'
 
 export const fetchDocument = (params = {}) => {
   return (dispatch) => {
@@ -33,7 +34,7 @@ export const crateDocument = (params = {}, cb = null) => {
   return (dispatch, getState) => {
     return request.crateDocument(params)
       .then(response => {
-        const currentList = getState().doc.list
+        const currentList = getState().profile.documents
         const newList = [...[response.data], ...currentList]
         dispatch({
           type: CREATE_DOC,
@@ -48,8 +49,8 @@ export const deleteDocument = (params = {}, cb = null) => {
   return (dispatch, getState) => {
     return request.deleteDocumentById(params)
       .then(response => {
-        const currentList = getState().doc.list
-        const newList = currentList.filter((row) => row.u_id !== response.data)
+        const currentList = getState().profile.documents
+        const newList = currentList.filter((row) => row.id !== response.data)
         dispatch({
           type: DELETE_DOC,
           payload: { documents: newList }
@@ -63,8 +64,23 @@ export const updateDocument = (params = {}, cb = null) => {
   return (dispatch, getState) => {
     return request.updateDocument(params)
       .then(response => {
-        const currentList = getState().doc.list
-        const index = currentList.findIndex((row) => row.u_id === response.data.u_id)
+        const currentList = getState().profile.documents
+        const index = currentList.findIndex((row) => row.id === response.data.id)
+        currentList[index] = response.data
+        dispatch({
+          type: UPDATE_STATUS_DOC,
+          payload: { documents: currentList }
+        })
+        return cb && cb(response.data)
+      })
+  }
+}
+export const updateStatus = (params = {}, cb = null) => {
+  return (dispatch, getState) => {
+    return request.updateStatusDocument(params)
+      .then(response => {
+        const currentList = getState().profile.documents
+        const index = currentList.findIndex((row) => row.id === response.data.id)
         currentList[index] = response.data
         dispatch({
           type: DELETE_DOC,

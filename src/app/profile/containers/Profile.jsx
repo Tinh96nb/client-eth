@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Heading } from 'components/common'
 import {
   fetchDocument,
   crateDocument,
   deleteDocument,
-  updateDocument
+  updateDocument,
+  updateStatus
 } from '../reducer'
-import { Button } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 
 import ModalAdd from '../components/ModalAdd'
 import ModalEdit from '../components/ModalEdit'
@@ -27,9 +27,23 @@ class DocContainer extends Component {
     this.props.fetchDocument({ owner: this.props.me.address })
   }
   render () {
+    const { me } = this.props
     return (
       <div>
-        <Heading text={document} />
+        <Card>
+          <Card.Header>Profile</Card.Header>
+          {me &&
+            <Card.Body>
+              <Card.Title>{me.address}</Card.Title>
+              <div>
+                <b>Balance: </b><span>{me.balance}</span>
+              </div>
+              <div>
+                <b>number document: </b><span>{me.num_doc}</span>
+              </div>
+            </Card.Body>
+          }
+        </Card>
         <Button
           variant='primary'
           onClick={() => this.setState({ isShowModalAdd: true })}
@@ -41,6 +55,7 @@ class DocContainer extends Component {
         <ListDoc
           documents={this.props.documents}
           deleteDocument={this.props.deleteDocument}
+          updateStatus={this.props.updateStatus}
           handleSelectDoc={(doc) =>
             this.setState({ docSelecting: doc, isShowModalEdit: true })
           }
@@ -76,7 +91,8 @@ const mapDispatchToProps = dispatch => {
     fetchDocument: (params) => dispatch(fetchDocument(params)),
     crateDocument: (params, cb) => dispatch(crateDocument(params, cb)),
     deleteDocument: (params, cb) => dispatch(deleteDocument(params, cb)),
-    updateDocument: (params, cb) => dispatch(updateDocument(params, cb))
+    updateDocument: (params, cb) => dispatch(updateDocument(params, cb)),
+    updateStatus: (params, cb) => dispatch(updateStatus(params, cb))
   }
 }
 

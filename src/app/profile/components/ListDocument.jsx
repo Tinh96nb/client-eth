@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Table, Button, Badge } from 'react-bootstrap'
+import { Table, Button, Badge, Tooltip, OverlayTrigger } from 'react-bootstrap'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import { Link } from 'react-router-dom'
 import { convertTimeStampToString } from 'common/utils'
-import { statusDocument } from 'common/helpers/const'
+import { statusDocument, lableDocument } from 'common/helpers/const'
 
 export default class ListDoc extends Component {
   constructor (props) {
@@ -16,6 +16,7 @@ export default class ListDoc extends Component {
 
     this.renderTableDoc = this.renderTableDoc.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleChangeStatus = this.handleChangeStatus.bind(this)
   }
 
   handleDelete () {
@@ -33,7 +34,7 @@ export default class ListDoc extends Component {
       }
     }
     const params = {
-      id: this.state.docSelecting.u_id
+      id: this.state.docSelecting.id
     }
 
     this.props.deleteDocument(params, cb)
@@ -64,6 +65,51 @@ export default class ListDoc extends Component {
     )
   }
 
+  handleChangeStatus (id, status) {
+    this.props.updateStatus({ id, status })
+  }
+
+  renderStatus (id, status) {
+    if (status === lableDocument.CLOSED) {
+      return (
+        <OverlayTrigger
+          placement={'right'}
+          overlay={<Tooltip>Click to PUBLIC</Tooltip>}
+        >
+          <Badge
+            onClick={this.handleChangeStatus(id, lableDocument.PENDDING)}
+            pill
+            variant={statusDocument[status].class}
+          >
+            {statusDocument[status].status}
+          </Badge>
+        </OverlayTrigger>
+      )
+    }
+    if (status === lableDocument.ACEPTED) {
+      return (
+        <OverlayTrigger
+          placement={'right'}
+          overlay={<Tooltip>Click to PRIVATE</Tooltip>}
+        >
+          <Badge
+            onClick={this.handleChangeStatus(id, lableDocument.CLOSED)}
+            pill
+            variant={statusDocument[status].class}
+          >
+            {statusDocument[status].status}
+          </Badge>
+        </OverlayTrigger>
+      )
+    }
+    return <Badge
+      pill
+      variant={statusDocument[status].class}
+    >
+      {statusDocument[status].status}
+    </Badge>
+  }
+
   renderTableDoc (documents) {
     return (
       <Table striped bordered hover size='sm'>
@@ -82,22 +128,15 @@ export default class ListDoc extends Component {
           {documents.map((doc, index) => {
             return (
               <tr key={index}>
-                <td>{doc.u_id}</td>
+                <td>{doc.id}</td>
                 <td>
-                  <Link to={`/document/${doc.u_id}`}>
+                  <Link to={`/document/${doc.id}`}>
                     {doc.name}
                   </Link>
                 </td>
                 <td>{doc.content_hash}</td>
                 <td>{doc.owner}</td>
-                <td>
-                  <Badge
-                    pill
-                    variant={statusDocument[doc.status].class}
-                  >
-                    {statusDocument[doc.status].status}
-                  </Badge>
-                </td>
+                <td>{this.renderStatus(doc.id, doc.status)}</td>
                 <td>{convertTimeStampToString(doc.created_at)}</td>
                 <td>
                   <Button

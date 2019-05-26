@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { asideMenu } from 'common/helpers/const'
+import { asideMenu, asideMenuAdmin } from 'common/helpers/const'
 
 export default class Aside extends React.Component {
   constructor (props) {
@@ -20,7 +20,23 @@ export default class Aside extends React.Component {
         </Form>
         <div className='listmenu'>
           <Nav className='nav-list pt-2 pb-4'>
+            <div className='title-nav'>
+              Member
+            </div>
             {asideMenu.map((item, i) => {
+              return (
+                <Link
+                  key={i}
+                  className='nav-link'
+                  to={item.link}
+                >
+                  {item.name}</Link>
+              )
+            })}
+            <div className='title-nav'>
+              Admin
+            </div>
+            {asideMenuAdmin.map((item, i) => {
               return (
                 <Link
                   key={i}
