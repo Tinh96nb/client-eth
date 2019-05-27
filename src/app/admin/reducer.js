@@ -8,6 +8,10 @@ const DELETE_CATEGORY = 'admin/DELETE_CATEGORY'
 const FETCH_LIST_DOC = 'admin/FETCH_LIST_DOC'
 const UPDATE_STATUS_DOC = 'admin/UPDATE_STATUS_DOC'
 
+const FETCH_LIST_MEMBER = 'admin/FETCH_LIST_MEMBER'
+const CREATE_MEMBER = 'admin/CREATE_MEMBER'
+const UPDATE_STATUS_MEMBER = 'admin/UPDATE_STATUS_MEMBER'
+
 export const fetchDocument = (params = {}) => {
   return (dispatch) => {
     return request.getListDocument(params)
@@ -20,7 +24,7 @@ export const fetchDocument = (params = {}) => {
   }
 }
 export const updateStatusDoc = (params = {}, cb = null) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return request.adminUpdateStatusDocument(params)
       .then(response => {
         dispatch(fetchDocument())
@@ -87,6 +91,43 @@ export const updateCategory = (params = {}, cb = null) => {
   }
 }
 
+export const fetchListMember = (params = {}) => {
+  return (dispatch) => {
+    return request.getListMember(params)
+      .then(response => {
+        dispatch({
+          type: FETCH_LIST_MEMBER,
+          payload: { members: response.data }
+        })
+      })
+  }
+}
+
+export const createMember = (params = {}, cb) => {
+  return (dispatch, getState) => {
+    return request.createMember(params)
+      .then(response => {
+        const currentList = getState().admin.members
+        const newList = [...[response.data], ...currentList]
+        dispatch({
+          type: CREATE_MEMBER,
+          payload: { members: newList }
+        })
+        return cb && cb(response.data)
+      })
+  }
+}
+
+export const updateStatusMember = (params = {}, cb = null) => {
+  return (dispatch) => {
+    return request.updateStatusMember(params)
+      .then(response => {
+        dispatch(fetchListMember())
+        return cb && cb(response.data)
+      })
+  }
+}
+
 const initState = {
   documents: [],
   categories: [],
@@ -101,6 +142,9 @@ export const adminReducer = (state = initState, action) => {
     case DELETE_CATEGORY:
     case FETCH_LIST_DOC:
     case UPDATE_STATUS_DOC:
+    case FETCH_LIST_MEMBER:
+    case CREATE_MEMBER:
+    case UPDATE_STATUS_MEMBER:
       return { ...state, ...action.payload }
     default:
       return state

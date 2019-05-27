@@ -6,13 +6,13 @@ export const asideMenu = [
   },
   {
     icon: 'fa-dollar',
-    link: '/profile',
-    name: 'Profile'
+    link: '/member',
+    name: 'Member'
   },
   {
     icon: 'fa-dollar',
-    link: '/member',
-    name: 'Member'
+    link: '/profile',
+    name: 'Profile'
   }
 ]
 
@@ -20,12 +20,12 @@ export const asideMenuAdmin = [
   {
     icon: 'fa-tasks',
     link: '/admin/document',
-    name: 'Member'
+    name: 'Document'
   },
   {
     icon: 'fa-dollar',
     link: '/admin/member',
-    name: 'Document'
+    name: 'Member'
   },
   {
     icon: 'fa-dollar',

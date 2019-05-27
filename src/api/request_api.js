@@ -440,3 +440,58 @@ export const adminUpdateStatusDocument = function (parameters = {}) {
     getConfig(parameters)
   )
 }
+
+export const createMember = function (parameters = {}) {
+  let path = '/admin/member'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  if (parameters['amount'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: amount'))
+  }
+  if (parameters['amount'] !== undefined) {
+    form['amount'] = parameters['amount']
+  }
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'POST',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
+
+export const updateStatusMember = function (parameters = {}) {
+  let path = '/admin/member/change-status'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  if (parameters['id'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: id'))
+  }
+  if (parameters['id'] !== undefined) {
+    form['id'] = parameters['id']
+  }
+
+  if (parameters['status'] === undefined) {
+    return Promise.reject(new Error('Missing required parameter: status'))
+  }
+  if (parameters['status'] !== undefined) {
+    form['status'] = parameters['status']
+  }
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'POST',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}

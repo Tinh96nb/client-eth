@@ -77,7 +77,7 @@ export default class ListDoc extends Component {
           overlay={<Tooltip>Click to PUBLIC</Tooltip>}
         >
           <Badge
-            onClick={this.handleChangeStatus(id, lableDocument.PENDDING)}
+            onClick={() => this.handleChangeStatus(id, lableDocument.PENDDING)}
             pill
             variant={statusDocument[status].class}
           >
@@ -93,7 +93,7 @@ export default class ListDoc extends Component {
           overlay={<Tooltip>Click to PRIVATE</Tooltip>}
         >
           <Badge
-            onClick={this.handleChangeStatus(id, lableDocument.CLOSED)}
+            onClick={() => this.handleChangeStatus(id, lableDocument.CLOSED)}
             pill
             variant={statusDocument[status].class}
           >

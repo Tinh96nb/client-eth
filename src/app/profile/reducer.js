@@ -76,16 +76,10 @@ export const updateDocument = (params = {}, cb = null) => {
   }
 }
 export const updateStatus = (params = {}, cb = null) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return request.updateStatusDocument(params)
       .then(response => {
-        const currentList = getState().profile.documents
-        const index = currentList.findIndex((row) => row.id === response.data.id)
-        currentList[index] = response.data
-        dispatch({
-          type: DELETE_DOC,
-          payload: { documents: currentList }
-        })
+        dispatch(fetchDocument())
         return cb && cb(response.data)
       })
   }

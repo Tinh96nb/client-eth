@@ -23,6 +23,7 @@ import Profile from './profile/containers/Profile'
 // admin
 import CategoryManager from './admin/containers/Category'
 import DocManager from './admin/containers/Document'
+import MemManager from './admin/containers/Member'
 
 export class App extends Component {
   componentWillMount () {
@@ -35,13 +36,14 @@ export class App extends Component {
     }
   }
   render () {
+    const { profile } = this.props
     return (
       <Fragment>
         <CheckWeb3
           postLogin={this.props.postLogin}
           getUserMe={this.props.getUserMe}
         >
-          <Header profile={this.props.profile} />
+          <Header profile={profile} />
           <div className='container-fluid'>
             <div className='flex-xl-nowrap row'>
               <Router>
@@ -55,9 +57,14 @@ export class App extends Component {
                       <Route path='/document' component={DocumentList} />
                       <Route path='/member' component={Member} />
                       <Route path='/profile' component={Profile} />
-
-                      <Route path='/admin/category' component={CategoryManager} />
-                      <Route path='/admin/document' component={DocManager} />
+                      {profile && profile.role === 'admin'
+                        ? <Fragment>
+                          <Route path='/admin/category' component={CategoryManager} />
+                          <Route path='/admin/document' component={DocManager} />
+                          <Route path='/admin/member' component={MemManager} />
+                        </Fragment>
+                        : null
+                      }
                       <Route component={() => (<p>Not Found</p>)} />
                     </Switch>
                   </div>
