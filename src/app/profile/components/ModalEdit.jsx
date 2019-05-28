@@ -14,7 +14,7 @@ export default class ModalEdit extends Component {
       document: {
         id: 0,
         name: '',
-        category: 1,
+        category_id: 1,
         file_content: '',
         size: 0,
         description: ''
@@ -57,7 +57,7 @@ export default class ModalEdit extends Component {
     const doc = this.state.document
     const cb = (res) => {
       this.handleClose()
-      createToast({ type: 'success', message: 'Edit success document' })
+      createToast({ type: 'success', message: 'Edit document success!' })
     }
     this.props.updateDocument(doc, cb)
   }
@@ -68,7 +68,7 @@ export default class ModalEdit extends Component {
       document: {
         id: 0,
         name: '',
-        category: 1,
+        category_id: 1,
         file_content: '',
         size: 0,
         description: ''
@@ -88,7 +88,7 @@ export default class ModalEdit extends Component {
             <Modal.Title>Update document</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <UploadFile getInfo={this.infoFileUpload} />
+            <UploadFile getInfo={this.infoFileUpload} isRequired={false} />
             <Input
               type={'text'}
               title={'Document Name'}
@@ -101,8 +101,7 @@ export default class ModalEdit extends Component {
               title={'Category'}
               name={'category'}
               options={this.props.categories}
-              value={this.state.document.category}
-              selected={this.state.document.category_id}
+              value={this.state.document.category_id}
               placeholder={'Select category'}
               handleChange={this.handleInput}
             />

@@ -27,11 +27,12 @@ class UploadFile extends React.Component {
   }
 
   render () {
+    const { isRequired = false } = this.props
     return (
       <div className='form-group'>
         <label>Select file document
         </label>
-        <span className='text-danger'>*</span>
+        {isRequired && <span className='text-danger'> *</span>}
         <div className='d-flex justify-content-center'>
           <div className='col col-md-7' style={{ cursor: 'pointer' }}>
             <input className='custom-file-input' type='file' onChange={this.handleselectedFile} />

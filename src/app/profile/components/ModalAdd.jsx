@@ -82,7 +82,7 @@ export default class ModalAdd extends Component {
             <Modal.Title>Create document</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <UploadFile getInfo={this.infoFileUpload} />
+            <UploadFile getInfo={this.infoFileUpload} isRequired />
             <Input
               type={'text'}
               title={'Document Name'}

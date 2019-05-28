@@ -7,9 +7,9 @@ const Select = props => {
     value,
     handleChange,
     placeholder,
-    options = [],
-    selected = 1
+    options = []
   } = props
+
   return (
     <div className='form-group'>
       <label> {title} </label>
@@ -20,7 +20,7 @@ const Select = props => {
         onChange={handleChange}
         className='form-control'
       >
-        <option value='' disabled>
+        <option disabled>
           {placeholder}
         </option>
         {options.map(option => {

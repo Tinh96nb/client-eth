@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Heading } from 'components/common'
 import {
   fetchDocument,
   crateDocument
 } from '../reducer'
-import { Button } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 import ModalAdd from '../components/ModalAdd'
 import ListDoc from '../components/ListDocument'
 
@@ -23,15 +22,20 @@ class DocContainer extends Component {
   render () {
     return (
       <div>
-        <Heading text={document} />
-        <Button
-          variant='primary'
-          onClick={() => this.setState({ isShowModalAdd: true })}
-        >
-          Create
-        </Button>
-        <p>Here’s what you need to know before getting started with the Navbar:</p>
-
+        <Card border='light'>
+          <Card.Header>
+            <h5 className='pull-left'>List Document</h5>
+            <Button
+              className='pull-right'
+              variant='primary'
+              size='sm'
+              onClick={() => this.setState({ isShowModalAdd: true })}
+            >
+              <i className='fa fa-cloud-upload' aria-hidden='true' /> New
+            </Button>
+          </Card.Header>
+        </Card>
+        <p />
         <ListDoc
           documents={this.props.documents}
           deleteDocument={this.props.deleteDocument}

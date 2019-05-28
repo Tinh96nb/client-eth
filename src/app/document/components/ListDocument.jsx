@@ -12,11 +12,12 @@ export default class ListDoc extends Component {
       <Table striped bordered hover size='sm'>
         <thead>
           <tr>
-            <th>#</th>
+            <th style={{ width: '50px' }}>#</th>
             <th>Name</th>
             <th>Hash Doc</th>
             <th>Owner</th>
-            <th>Status</th>
+            <th style={{ width: '100px' }}>Status</th>
+            <th>Category</th>
             <th>Upload at</th>
           </tr>
         </thead>
@@ -32,7 +33,7 @@ export default class ListDoc extends Component {
                 </td>
                 <td>{doc.content_hash}</td>
                 <td>{doc.owner}</td>
-                <td>
+                <td >
                   <Badge
                     pill
                     variant={statusDocument[doc.status].class}
@@ -40,6 +41,7 @@ export default class ListDoc extends Component {
                     {statusDocument[doc.status].status}
                   </Badge>
                 </td>
+                <td>{doc.category_name}</td>
                 <td>{convertTimeStampToString(doc.created_at)}</td>
               </tr>
             )
