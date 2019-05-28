@@ -81,7 +81,7 @@ class DocContainer extends Component {
 const mapStateToProps = state => {
   return {
     documents: state.profile.documents,
-    categories: state.app.categories,
+    categories: state.admin.categories,
     me: state.app.me
   }
 }

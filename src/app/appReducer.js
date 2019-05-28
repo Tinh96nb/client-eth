@@ -5,8 +5,7 @@ const FETCH_CATEGORY = 'user/FETCH_CATEGORY'
 
 const initialState = {
   authChecked: false,
-  me: null,
-  categories: []
+  me: null
 }
 
 export function postLogin (parameters, cb) {
@@ -25,16 +24,6 @@ export function getUserMe () {
       dispatch({
         type: FETCH_USER_ME,
         payload: { me: response.data.profile, authChecked: true }
-      })
-    })
-}
-
-export function getListCategory () {
-  return (dispatch) => request.getListCategory()
-    .then((response) => {
-      dispatch({
-        type: FETCH_CATEGORY,
-        payload: { categories: response.data }
       })
     })
 }

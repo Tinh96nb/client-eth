@@ -400,6 +400,14 @@ export const getListMember = function (parameters = {}) {
   let jsonBody = {}
   let form = {}
 
+  if (parameters['role'] !== undefined) {
+    queryParameters['role'] = parameters['role']
+  }
+
+  if (parameters['status'] !== undefined) {
+    queryParameters['status'] = parameters['status']
+  }
+
   queryParameters = mergeQueryParams(parameters, queryParameters)
   return request(
     'GET',

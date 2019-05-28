@@ -93,7 +93,7 @@ export const updateCategory = (params = {}, cb = null) => {
 
 export const fetchListMember = (params = {}) => {
   return (dispatch) => {
-    return request.getListMember(params)
+    return request.getListMember({ role: 'member' })
       .then(response => {
         dispatch({
           type: FETCH_LIST_MEMBER,

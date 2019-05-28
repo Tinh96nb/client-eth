@@ -50,3 +50,8 @@ export const statusMember = {
   0: { code: 0, status: 'BANNED', class: 'danger' },
   1: { code: 1, status: 'ACTIVE', class: 'success' }
 }
+
+export const lableMember = {
+  BLOCK: 0,
+  ACTIVE: 1
+}

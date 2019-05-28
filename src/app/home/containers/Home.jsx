@@ -13,6 +13,11 @@ class HomeContainer extends Component {
     return (
       <div>
         home
+        - check status member moi cho vao
+        - log activiti
+        - dashbroad
+        - bat request fail, notify
+        - refactor layotu
       </div>
     )
   }

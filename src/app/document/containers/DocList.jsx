@@ -52,7 +52,7 @@ class DocContainer extends Component {
 const mapStateToProps = state => {
   return {
     documents: state.doc.list,
-    categories: state.app.categories
+    categories: state.admin.categories
   }
 }
 
