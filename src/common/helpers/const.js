@@ -1,6 +1,11 @@
 export const asideMenu = [
   {
     icon: 'fa-tasks',
+    link: '/',
+    name: 'Dashbroad'
+  },
+  {
+    icon: 'fa-tasks',
     link: '/document',
     name: 'Document'
   },

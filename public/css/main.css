@@ -55,7 +55,13 @@ table {
 }
 .nav-list a.active {
   font-weight: 500;
-    color: #1a1a1a!important;
+  color: #1a1a1a!important;
+}
+.nav-list .title-nav {
+  font-size: 19px;
+  color: #1a1a1a!important;
+  margin-top: 10px;
+  font-weight: 500;
 }
 .right-sidebar {
   -webkit-order: 2;
@@ -107,4 +113,28 @@ table {
 }
 .sweet-alert p span{
   position: relative !important;
+}
+.card-header h5 {
+  margin: 0;
+}
+.card {
+  margin-bottom: 20px;
+}
+.card ul {
+  margin: 0;
+  padding-left: 5px;
+}
+.card ul li {
+  list-style: none;
+  padding-bottom: 10px;
+  margin-bottom: 13px;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.card ul li .title {
+  float: left;
+  width: 15%;
+  font-weight: 500;
+}
+.card ul li span {
+  margin-left: 6px;
 }

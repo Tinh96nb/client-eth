@@ -7,7 +7,7 @@ import {
   updateDocument,
   updateStatus
 } from '../reducer'
-import { Button, Card } from 'react-bootstrap'
+import { Button, Card, Badge } from 'react-bootstrap'
 
 import ModalAdd from '../components/ModalAdd'
 import ModalEdit from '../components/ModalEdit'
@@ -31,27 +31,47 @@ class DocContainer extends Component {
     return (
       <div>
         <Card>
-          <Card.Header>Profile</Card.Header>
+          <Card.Header><h5 className='pull-left'>Profile</h5></Card.Header>
           {me &&
             <Card.Body>
-              <Card.Title>{me.address}</Card.Title>
-              <div>
-                <b>Balance: </b><span>{me.balance}</span>
-              </div>
-              <div>
-                <b>number document: </b><span>{me.num_doc}</span>
-              </div>
+              <ul>
+                <li>
+                  <div className='title'>
+                    <i className='fa fa-address-card' aria-hidden='true' /><span>Address</span>
+                  </div>
+                  {me.address}
+                </li>
+                <li>
+                  <div className='title'>
+                    <i className='fa fa-money' aria-hidden='true' /><span>Banlance</span>
+                  </div>
+                  {me.balance}
+                </li>
+                <li>
+                  <div className='title'>
+                    <i className='fa fa-file' aria-hidden='true' /><span>Document</span>
+                  </div>
+                  <Badge pill variant='dark'>
+                    {me.num_doc}
+                  </Badge>
+                </li>
+              </ul>
             </Card.Body>
           }
         </Card>
-        <Button
-          variant='primary'
-          onClick={() => this.setState({ isShowModalAdd: true })}
-        >
-          Create
-        </Button>
-        <p>Profile list documents</p>
-
+        <Card border='light'>
+          <Card.Header>
+            <h5 className='pull-left'>List Document</h5>
+            <Button
+              className='pull-right'
+              variant='primary'
+              size='sm'
+              onClick={() => this.setState({ isShowModalAdd: true })}
+            >
+              <i className='fa fa-cloud-upload' aria-hidden='true' /> New
+            </Button>
+          </Card.Header>
+        </Card>
         <ListDoc
           documents={this.props.documents}
           deleteDocument={this.props.deleteDocument}

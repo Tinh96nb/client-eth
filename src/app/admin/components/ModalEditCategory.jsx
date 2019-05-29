@@ -83,7 +83,7 @@ export default class ModalEdit extends Component {
               variant='primary'
               onClick={this.handleFormSubmit}
             >
-              Save Changes
+              Save Change
             </Button>
           </Modal.Footer>
         </form>

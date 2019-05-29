@@ -6,7 +6,7 @@ import {
   deleteCategory,
   updateCategory
 } from '../reducer'
-import { Button } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 
 import ModalAdd from '../components/ModalAddCategory'
 import ModalEdit from '../components/ModalEditCategory'
@@ -29,18 +29,24 @@ class CategoryContainer extends Component {
     const { categories } = this.props
     return (
       <div>
-        <Button
-          variant='primary'
-          onClick={() => this.setState({ isShowModalAdd: true })}
-        >
-          Create
-        </Button>
-        <p>List category</p>
+        <Card border='light'>
+          <Card.Header>
+            <h5 className='pull-left'>Manager Category</h5>
+            <Button
+              className='pull-right'
+              variant='primary'
+              size='sm'
+              onClick={() => this.setState({ isShowModalAdd: true })}
+            >
+              <i className='fa fa-plus-circle' aria-hidden='true' /> Create
+            </Button>
+          </Card.Header>
+        </Card>
 
         <ListCategory
           categories={categories}
           deleteCategory={this.props.deleteCategory}
-          handleSelectDoc={(category) =>
+          handleSelect={(category) =>
             this.setState({ categorySelecting: category, isShowModalEdit: true })
           }
         />

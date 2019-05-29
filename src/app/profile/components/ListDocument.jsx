@@ -115,13 +115,14 @@ export default class ListDoc extends Component {
       <Table striped bordered hover size='sm'>
         <thead>
           <tr>
-            <th>#</th>
+            <th style={{ width: '50px' }}>#</th>
             <th>Name</th>
-            <th>Hash Doc</th>
+            <th>Hash Value</th>
             <th>Owner</th>
-            <th>Status</th>
+            <th style={{ width: '90px' }}>Status</th>
+            <th>Category</th>
             <th>Upload at</th>
-            <th />
+            <th style={{ width: '90px' }} />
           </tr>
         </thead>
         <tbody>
@@ -137,15 +138,17 @@ export default class ListDoc extends Component {
                 <td>{doc.content_hash}</td>
                 <td>{doc.owner}</td>
                 <td>{this.renderStatus(doc.id, doc.status)}</td>
+                <td>{doc.category_name}</td>
                 <td>{convertTimeStampToString(doc.created_at)}</td>
-                <td>
+
+                <td style={{ textAlign: 'center' }}>
                   <Button
                     variant='primary'
                     size='sm'
                     onClick={(e) => this.props.handleSelectDoc(doc)}
                   >
-                    Edit
-                  </Button>
+                    <i className='fa fa-pencil-square-o' aria-hidden='true' />
+                  </Button>{' '}
                   <Button
                     variant='danger'
                     size='sm'
@@ -154,7 +157,7 @@ export default class ListDoc extends Component {
                       isshowModalDel: true
                     })}
                   >
-                    Delete
+                    <i className='fa fa-trash' aria-hidden='true' />
                   </Button>
                 </td>
               </tr>

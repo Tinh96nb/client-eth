@@ -2,17 +2,12 @@ import React from 'react'
 import { Form, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { asideMenu, asideMenuAdmin } from 'common/helpers/const'
+import { getUrlParams } from 'common/utils'
 
 export default class Aside extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      activeKey: null
-    }
-  }
-
   render () {
+    const currentLink = window.location.pathname
+
     return (
       <div className='col-xl-2 col-md-3 col-12 d-flex flex-column sidebar'>
         <Form className='py-3 d-flex align-items-center'>
@@ -27,10 +22,11 @@ export default class Aside extends React.Component {
               return (
                 <Link
                   key={i}
-                  className='nav-link'
+                  className={currentLink === item.link ? 'active nav-link' : 'nav-link'}
                   to={item.link}
                 >
-                  {item.name}</Link>
+                  {item.name}
+                </Link>
               )
             })}
             <div className='title-nav'>

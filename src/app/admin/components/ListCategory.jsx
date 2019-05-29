@@ -68,11 +68,11 @@ export default class ListCategory extends Component {
         <Table striped bordered hover size='sm'>
           <thead>
             <tr>
-              <th>#</th>
+              <th style={{ width: '50px' }}>#</th>
               <th>Name</th>
               <th>Number Document</th>
               <th>Created at</th>
-              <th />
+              <th style={{ width: '90px' }} />
             </tr>
           </thead>
           <tbody>
@@ -87,14 +87,14 @@ export default class ListCategory extends Component {
                     {category.num_doc}
                   </td>
                   <td>{convertTimeStampToString(category.created_at)}</td>
-                  <td>
+                  <td style={{ textAlign: 'center' }}>
                     <Button
                       variant='primary'
                       size='sm'
-                      onClick={(e) => this.props.handleSelectDoc(category)}
+                      onClick={(e) => this.props.handleSelect(category)}
                     >
-                    Edit
-                    </Button>
+                      <i className='fa fa-pencil-square-o' aria-hidden='true' />
+                    </Button>{' '}
                     <Button
                       variant='danger'
                       size='sm'
@@ -103,7 +103,7 @@ export default class ListCategory extends Component {
                         isshowModalDel: true
                       })}
                     >
-                    Delete
+                      <i className='fa fa-trash' aria-hidden='true' />
                     </Button>
                   </td>
                 </tr>

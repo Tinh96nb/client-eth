@@ -35,7 +35,6 @@ class DocContainer extends Component {
             </Button>
           </Card.Header>
         </Card>
-        <p />
         <ListDoc
           documents={this.props.documents}
           deleteDocument={this.props.deleteDocument}

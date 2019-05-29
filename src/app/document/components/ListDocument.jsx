@@ -14,9 +14,9 @@ export default class ListDoc extends Component {
           <tr>
             <th style={{ width: '50px' }}>#</th>
             <th>Name</th>
-            <th>Hash Doc</th>
+            <th>Hash Value</th>
             <th>Owner</th>
-            <th style={{ width: '100px' }}>Status</th>
+            <th style={{ width: '90px' }}>Status</th>
             <th>Category</th>
             <th>Upload at</th>
           </tr>
