@@ -11,13 +11,48 @@ class HomeContainer extends Component {
 
   render () {
     return (
-      <div>
-        home
-        - check status member moi cho vao
-        - log activiti
-        - dashbroad
+      <div className='dashboard'>
+        - check status member moi cho vao, xoa token, prop text vao trang metamask
+        - log activiti ngoai daskbroad
+        - hien thi link ipfs khi crated success
+        - search document
         - bat request fail, notify
-        - refactor layotu
+        <div className='row'>
+          <div className='col-md-4 col-sm-6 col-xs-12'>
+            <div className='info-box'>
+              <span className='info-box-icon bg-primary'>
+                <i className='fa fa-file-text' aria-hidden='true' />
+              </span>
+              <div className='info-box-content'>
+                <span className='info-box-text'>Document</span>
+                <span className='info-box-number'>90</span>
+              </div>
+            </div>
+          </div>
+          <div className='col-md-4 col-sm-6 col-xs-12'>
+            <div className='info-box'>
+              <span className='info-box-icon bg-info'>
+                <i className='fa fa-indent' />
+              </span>
+              <div className='info-box-content'>
+                <span className='info-box-text'>Category</span>
+                <span className='info-box-number'>90</span>
+              </div>
+            </div>
+          </div>
+          <div className='col-md-4 col-sm-6 col-xs-12'>
+            <div className='info-box'>
+              <span className='info-box-icon bg-success'>
+                <i className='fa fa-user' aria-hidden='true' />
+              </span>
+
+              <div className='info-box-content'>
+                <span className='info-box-text'>Member</span>
+                <span className='info-box-number'>90</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

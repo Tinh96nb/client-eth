@@ -4,6 +4,7 @@ import UploadFile from 'components/form/UploadFile'
 import Input from 'components/form/Input'
 import Select from 'components/form/Select'
 import TextArea from 'components/form/TextArea'
+import { createToast } from 'common/helpers/toast'
 
 export default class ModalAdd extends Component {
   constructor (props) {
@@ -54,6 +55,7 @@ export default class ModalAdd extends Component {
     const doc = this.state.document
     const cb = (res) => {
       this.handleClose()
+      createToast({ type: 'success', message: 'Create document success!' })
     }
     this.props.crateDocument(doc, cb)
   }

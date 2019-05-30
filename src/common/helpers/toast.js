@@ -10,7 +10,7 @@ export function createToast ({ type, message }) {
     transition: Flip,
     position: 'top-right',
     className: 'custom-toast',
-    autoClose: 5000,
+    autoClose: 4000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

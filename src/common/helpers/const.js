@@ -1,21 +1,21 @@
 export const asideMenu = [
   {
-    icon: 'fa-tasks',
+    icon: 'fa-tachometer',
     link: '/',
     name: 'Dashbroad'
   },
   {
-    icon: 'fa-tasks',
+    icon: 'fa-file-text',
     link: '/document',
     name: 'Document'
   },
   {
-    icon: 'fa-dollar',
+    icon: 'fa-users',
     link: '/member',
     name: 'Member'
   },
   {
-    icon: 'fa-dollar',
+    icon: 'fa-user',
     link: '/profile',
     name: 'Profile'
   }
@@ -23,19 +23,19 @@ export const asideMenu = [
 
 export const asideMenuAdmin = [
   {
-    icon: 'fa-tasks',
+    icon: 'fa-file-text',
     link: '/admin/document',
     name: 'Document'
   },
   {
-    icon: 'fa-dollar',
+    icon: 'fa-users',
     link: '/admin/member',
     name: 'Member'
   },
   {
-    icon: 'fa-dollar',
+    icon: 'fa-list',
     link: '/admin/category',
-    name: 'Manager Category'
+    name: 'Category'
   }
 ]
 
@@ -52,7 +52,7 @@ export const lableDocument = {
   'REJECTED': 3
 }
 export const statusMember = {
-  0: { code: 0, status: 'BANNED', class: 'danger' },
+  0: { code: 0, status: 'BANNED', class: 'dark' },
   1: { code: 1, status: 'ACTIVE', class: 'success' }
 }
 

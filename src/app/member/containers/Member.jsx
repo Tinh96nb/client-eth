@@ -45,7 +45,7 @@ class MemberContainer extends Component {
                       {mem.address}
                     </Link>
                   </td>
-                  <td>{mem.balance}</td>
+                  <td>{mem.balance} ether</td>
                   <td>
                     <Badge
                       pill
@@ -54,7 +54,11 @@ class MemberContainer extends Component {
                       {statusMember[mem.status].status}
                     </Badge>
                   </td>
-                  <td>{mem.num_doc}</td>
+                  <td style={{ textAlign: 'center' }}>
+                    <Badge pill variant='dark'>
+                      {mem.num_doc}
+                    </Badge>
+                  </td>
                 </tr>
               )
             })}

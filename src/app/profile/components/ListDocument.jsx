@@ -4,6 +4,7 @@ import SweetAlert from 'react-bootstrap-sweetalert'
 import { Link } from 'react-router-dom'
 import { convertTimeStampToString } from 'common/utils'
 import { statusDocument, lableDocument } from 'common/helpers/const'
+import { createToast } from 'common/helpers/toast'
 
 export default class ListDoc extends Component {
   constructor (props) {
@@ -66,7 +67,10 @@ export default class ListDoc extends Component {
   }
 
   handleChangeStatus (id, status) {
-    this.props.updateStatus({ id, status })
+    const cb = (res) => {
+      createToast({ type: 'success', message: 'Change status success!' })
+    }
+    this.props.updateStatus({ id, status }, cb)
   }
 
   renderStatus (id, status) {

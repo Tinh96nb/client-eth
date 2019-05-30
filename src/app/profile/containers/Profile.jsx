@@ -45,7 +45,7 @@ class DocContainer extends Component {
                   <div className='title'>
                     <i className='fa fa-money' aria-hidden='true' /><span>Banlance</span>
                   </div>
-                  {me.balance}
+                  {me.balance} ether
                 </li>
                 <li>
                   <div className='title'>

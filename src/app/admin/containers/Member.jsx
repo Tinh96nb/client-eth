@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Table, Badge, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { createToast } from 'common/helpers/toast'
+import { Table, Badge, OverlayTrigger, Tooltip, Card } from 'react-bootstrap'
 import { statusMember, lableMember } from 'common/helpers/const'
 import {
   fetchListMember,
   updateStatusMember,
   createMember
 } from '../reducer'
-import { convertTimeStampToString } from 'common/utils'
 
 class MemberContainer extends Component {
   constructor (props) {
@@ -23,60 +23,72 @@ class MemberContainer extends Component {
   }
 
   handleChangeStatus (id, status) {
-    this.props.updateStatusMember({ id, status })
+    const cb = (res) => {
+      createToast({ type: 'success', message: 'Change status success!' })
+    }
+    this.props.updateStatusMember({ id, status }, cb)
   }
 
   render () {
     const { members } = this.props
     return (
-      <Table striped bordered hover size='sm'>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Address</th>
-            <th>Balance</th>
-            <th>created_at</th>
-            <th>Number doc</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {members.map((mem, index) => {
-            return (
-              <tr key={index}>
-                <td>{mem.id}</td>
-                <td>
-                  <Link to={`/document?member=${mem.address}`}>
-                    {mem.address}
-                  </Link>
-                </td>
-                <td>{mem.balance}</td>
-                <td>{convertTimeStampToString(mem.created_at)}</td>
-                <td>{mem.num_doc}</td>
-                <td>
-                  <OverlayTrigger
-                    placement={'right'}
-                    overlay={<Tooltip>
-                      Click to {mem.status !== lableMember.BLOCK ? 'BLOCK' : 'ACTIVE'}
-                    </Tooltip>}
-                  >
-                    <Badge
-                      onClick={() => this.handleChangeStatus(
-                        mem.id,
-                        mem.status !== lableMember.BLOCK ? lableMember.BLOCK : lableMember.ACTIVE
-                      )}
-                      pill
-                      variant={statusMember[mem.status].class}
-                    >
-                      {statusMember[mem.status].status}
+      <>
+        <Card border='light'>
+          <Card.Header>
+            <h5 className='pull-left'>Manager member</h5>
+          </Card.Header>
+        </Card>
+        <Table striped bordered hover size='sm'>
+          <thead>
+            <tr>
+              <th style={{ width: '50px' }}>#</th>
+              <th>Address</th>
+              <th>Balance</th>
+              <th style={{ width: '80px' }}>N.Doc</th>
+              <th style={{ width: '80px' }}>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {members.map((mem, index) => {
+              return (
+                <tr key={index}>
+                  <td>{mem.id}</td>
+                  <td>
+                    <Link to={`/document?member=${mem.address}`}>
+                      {mem.address}
+                    </Link>
+                  </td>
+                  <td>{mem.balance} ether</td>
+                  <td style={{ textAlign: ' center' }}>
+                    <Badge pill variant='dark'>
+                      {mem.num_doc}
                     </Badge>
-                  </OverlayTrigger>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </Table>
+                  </td>
+                  <td>
+                    <OverlayTrigger
+                      placement={'right'}
+                      overlay={<Tooltip>
+                      Click to {mem.status !== lableMember.BLOCK ? 'BLOCK' : 'ACTIVE'}
+                      </Tooltip>}
+                    >
+                      <Badge
+                        onClick={() => this.handleChangeStatus(
+                          mem.id,
+                          mem.status !== lableMember.BLOCK ? lableMember.BLOCK : lableMember.ACTIVE
+                        )}
+                        pill
+                        variant={statusMember[mem.status].class}
+                      >
+                        {statusMember[mem.status].status}
+                      </Badge>
+                    </OverlayTrigger>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </Table>
+      </>
     )
   }
 }

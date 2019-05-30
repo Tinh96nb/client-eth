@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import Input from 'components/form/Input'
+import { createToast } from 'common/helpers/toast'
 
 export default class ModalAdd extends Component {
   constructor (props) {
@@ -33,6 +34,7 @@ export default class ModalAdd extends Component {
     const category = this.state.category
     const cb = (res) => {
       this.handleClose()
+      createToast({ type: 'success', message: 'Create category success!' })
     }
     this.props.createCategory(category, cb)
   }

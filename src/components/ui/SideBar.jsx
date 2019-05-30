@@ -2,7 +2,6 @@ import React from 'react'
 import { Form, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { asideMenu, asideMenuAdmin } from 'common/helpers/const'
-import { getUrlParams } from 'common/utils'
 
 export default class Aside extends React.Component {
   render () {
@@ -15,9 +14,7 @@ export default class Aside extends React.Component {
         </Form>
         <div className='listmenu'>
           <Nav className='nav-list pt-2 pb-4'>
-            <div className='title-nav'>
-              Member
-            </div>
+            <div className='title-nav'> Member </div>
             {asideMenu.map((item, i) => {
               return (
                 <Link
@@ -25,7 +22,7 @@ export default class Aside extends React.Component {
                   className={currentLink === item.link ? 'active nav-link' : 'nav-link'}
                   to={item.link}
                 >
-                  {item.name}
+                  <i className={`fa ${item.icon}`} aria-hidden='true' /> {item.name}
                 </Link>
               )
             })}
@@ -36,10 +33,11 @@ export default class Aside extends React.Component {
               return (
                 <Link
                   key={i}
-                  className='nav-link'
+                  className={currentLink === item.link ? 'active nav-link' : 'nav-link'}
                   to={item.link}
                 >
-                  {item.name}</Link>
+                  <i className={`fa ${item.icon}`} aria-hidden='true' /> {item.name}
+                </Link>
               )
             })}
           </Nav>

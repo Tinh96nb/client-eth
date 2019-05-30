@@ -48,6 +48,11 @@ table {
   color: rgba(26,26,26,.75);
   transition: color .2s ease-out;
 }
+.nav-list a i{
+  margin-right: 5px;
+  width: 11%;
+  display: inline-block;
+}
 .nav-list a:hover {
   text-decoration: none;
   color: #999;
@@ -137,4 +142,53 @@ table {
 }
 .card ul li span {
   margin-left: 6px;
+}
+span.badge-dark,.badge-success, .badge-secondary {
+  cursor: pointer;
+}
+
+.dashboard {
+  display: block;
+}
+.dashboard .info-box {
+  display: block;
+  min-height: 90px;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  border-radius: 2px;
+  margin-bottom: 15px;
+  background-color: #fdfdfd;
+  border: 1px solid #eee;
+}
+.dashboard .info-box-icon {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 2px;
+  display: block;
+  float: left;
+  height: 90px;
+  width: 90px;
+  text-align: center;
+  font-size: 45px;
+  line-height: 90px;
+  background: rgba(0,0,0,0.2);
+  color: #f7f7f7;
+}
+.dashboard .info-box-content {
+  padding: 5px 15px;
+  margin-left: 90px;
+}
+.dashboard .info-box-text {
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+.dashboard .info-box-number {
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
 }
