@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import UploadFile from 'components/form/UploadFile'
+import SweetAlert from 'react-bootstrap-sweetalert'
 import Input from 'components/form/Input'
 import Select from 'components/form/Select'
 import TextArea from 'components/form/TextArea'
-import { createToast } from 'common/helpers/toast'
 
 export default class ModalAdd extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
+      alertSuccess: '',
       document: {
         name: '',
         category: 1,
@@ -55,7 +56,23 @@ export default class ModalAdd extends Component {
     const doc = this.state.document
     const cb = (res) => {
       this.handleClose()
-      createToast({ type: 'success', message: 'Create document success!' })
+      const linkIpfs = `http://${process.env.IPFS_HOST}:${process.env.IPFS_PORT_GATEWAY}/ipfs/${res.linkIpfs}`
+      this.setState({
+        alertSuccess: (
+          <SweetAlert
+            success
+            title={`File's ipfs link`}
+            onConfirm={() => this.setState({ alertSuccess: null })}
+          >
+            <a
+              href={linkIpfs}
+              target='_blank'
+              style={{ wordBreak: 'break-all' }}
+            >{linkIpfs}
+            </a>
+          </SweetAlert>
+        )
+      })
     }
     this.props.crateDocument(doc, cb)
   }
@@ -75,57 +92,60 @@ export default class ModalAdd extends Component {
 
   render () {
     return (
-      <Modal
-        show={this.props.isShowModal}
-        onHide={this.handleClose}
-      >
-        <form onSubmit={this.handleFormSubmit}>
-          <Modal.Header closeButton>
-            <Modal.Title>Create document</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <UploadFile getInfo={this.infoFileUpload} isRequired />
-            <Input
-              type={'text'}
-              title={'Document Name'}
-              name={'name'}
-              value={this.state.document.name}
-              placeholder={'Enter name'}
-              handleChange={this.handleInput}
-            />
-            <Select
-              title={'Category'}
-              name={'category'}
-              options={this.props.categories}
-              value={this.state.document.category}
-              placeholder={'Select category'}
-              handleChange={this.handleInput}
-            />
-            <TextArea
-              title={'Description'}
-              rows={4}
-              value={this.state.document.description}
-              name={'description'}
-              handleChange={this.handleInput}
-              placeholder={'Enter some thing description for document'}
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant='secondary'
-              onClick={this.handleClose}
-            >
+      <>
+        <Modal
+          show={this.props.isShowModal}
+          onHide={this.handleClose}
+        >
+          <form onSubmit={this.handleFormSubmit}>
+            <Modal.Header closeButton>
+              <Modal.Title>Create document</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <UploadFile getInfo={this.infoFileUpload} isRequired />
+              <Input
+                type={'text'}
+                title={'Document Name'}
+                name={'name'}
+                value={this.state.document.name}
+                placeholder={'Enter name'}
+                handleChange={this.handleInput}
+              />
+              <Select
+                title={'Category'}
+                name={'category'}
+                options={this.props.categories}
+                value={this.state.document.category}
+                placeholder={'Select category'}
+                handleChange={this.handleInput}
+              />
+              <TextArea
+                title={'Description'}
+                rows={4}
+                value={this.state.document.description}
+                name={'description'}
+                handleChange={this.handleInput}
+                placeholder={'Enter some thing description for document'}
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant='secondary'
+                onClick={this.handleClose}
+              >
               Close
-            </Button>
-            <Button
-              variant='primary'
-              onClick={this.handleFormSubmit}
-            >
+              </Button>
+              <Button
+                variant='primary'
+                onClick={this.handleFormSubmit}
+              >
               Save Change
-            </Button>
-          </Modal.Footer>
-        </form>
-      </Modal>
+              </Button>
+            </Modal.Footer>
+          </form>
+        </Modal>
+        {this.state.alertSuccess}
+      </>
     )
   }
 }

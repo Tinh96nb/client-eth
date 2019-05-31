@@ -16,7 +16,7 @@ const Select = props => {
       <select
         id={name}
         name={name}
-        value={value}
+        defaultValue={value}
         onChange={handleChange}
         className='form-control'
       >

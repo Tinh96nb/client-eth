@@ -31,8 +31,9 @@ export class ListDoc extends Component {
   renderAction (id, status) {
     return (<div>
       <select
+        disabled={status === lableDocument.CLOSED}
         className='form-control form-control-sm'
-        defaultValue={status}
+        defaultValue={status === lableDocument.CLOSED ? 0 : status}
         onChange={(e) => {
           const status = e.target.value
           this.handleChangeStatus(id, status)

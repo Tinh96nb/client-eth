@@ -54,7 +54,7 @@ class DocDetailContainer extends Component {
                   {document.content_hash}
                 </li>
                 <li>
-                  <div className='title'><span>Hash ipfs</span></div>
+                  <div className='title'><span>Ipfs crypt</span></div>
                   {document.link_ipfs_crypt}
                 </li>
                 <li>

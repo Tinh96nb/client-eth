@@ -143,6 +143,23 @@ export const getListDocument = function (parameters = {}) {
   )
 }
 
+export const getSumary = function (parameters = {}) {
+  let path = '/documents/sumary'
+  let queryParameters = {}
+  let jsonBody = {}
+  let form = {}
+
+  queryParameters = mergeQueryParams(parameters, queryParameters)
+  return request(
+    'GET',
+    getDomain + path,
+    queryParameters,
+    jsonBody,
+    form,
+    getConfig(parameters)
+  )
+}
+
 export const getDocumentById = function (parameters = {}) {
   let path = '/documents/{id}'
   let queryParameters = {}

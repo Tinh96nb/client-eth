@@ -1,41 +1,26 @@
 import * as request from 'api/request_api'
 
-const FETCH_LIST_DOC = 'doc/FETCH_LIST_DOC'
-const FETCH_DETAIL_DOC = 'doc/FETCH_DETAIL_DOC'
+const SUMARY = 'home/SUMARY'
 
-export const fetchDocument = (params = {}) => {
+export const getSumary = () => {
   return (dispatch) => {
-    return request.getListDocument(params)
+    return request.getSumary()
       .then(response => {
         dispatch({
-          type: FETCH_LIST_DOC,
-          payload: { list: response.data }
-        })
-      })
-  }
-}
-
-export const fetchDocumentById = (params = {}) => {
-  return (dispatch) => {
-    return request.getDocumentById(params)
-      .then(response => {
-        dispatch({
-          type: FETCH_DETAIL_DOC,
-          payload: { one: response.data }
+          type: SUMARY,
+          payload: { sumary: response.data }
         })
       })
   }
 }
 
 const initState = {
-  list: [],
-  one: {}
+  sumary: null
 }
 
-export const docReducer = (state = initState, action) => {
+export const homeReducer = (state = initState, action) => {
   switch (action.type) {
-    case FETCH_LIST_DOC:
-    case FETCH_DETAIL_DOC:
+    case SUMARY:
       return { ...state, ...action.payload }
     default:
       return state

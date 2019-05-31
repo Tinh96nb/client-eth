@@ -7,6 +7,8 @@ import {
   updateDocument,
   updateStatus
 } from '../reducer'
+import { getUserMe } from 'app/appReducer'
+
 import { Button, Card, Badge } from 'react-bootstrap'
 
 import ModalAdd from '../components/ModalAdd'
@@ -24,6 +26,7 @@ class DocContainer extends Component {
   }
 
   componentWillMount () {
+    this.props.getUserMe()
     this.props.fetchDocument({ owner: this.props.me.address })
   }
   render () {
@@ -109,6 +112,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchDocument: (params) => dispatch(fetchDocument(params)),
+    getUserMe: (params) => dispatch(getUserMe(params)),
     crateDocument: (params, cb) => dispatch(crateDocument(params, cb)),
     deleteDocument: (params, cb) => dispatch(deleteDocument(params, cb)),
     updateDocument: (params, cb) => dispatch(updateDocument(params, cb)),

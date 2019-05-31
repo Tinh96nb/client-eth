@@ -116,7 +116,7 @@ export default class ListDoc extends Component {
 
   renderTableDoc (documents) {
     return (
-      <Table striped bordered hover size='sm'>
+      <Table striped bordered hover size='sm' className='profile'>
         <thead>
           <tr>
             <th style={{ width: '50px' }}>#</th>

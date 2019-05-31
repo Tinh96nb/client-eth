@@ -1,23 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getSumary } from '../reducer'
 
 class HomeContainer extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      isShowUpload: false
-    }
+  componentWillMount () {
+    this.props.getSumary()
   }
 
   render () {
+    const { sumary } = this.props
     return (
       <div className='dashboard'>
         - check status member moi cho vao, xoa token, prop text vao trang metamask
-        - log activiti ngoai daskbroad
-        - hien thi link ipfs khi crated success
+        - log activiti ngoai dashboard
         - search document
         - bat request fail, notify
-        <div className='row'>
+        {sumary && <div className='row'>
           <div className='col-md-4 col-sm-6 col-xs-12'>
             <div className='info-box'>
               <span className='info-box-icon bg-primary'>
@@ -25,7 +23,7 @@ class HomeContainer extends Component {
               </span>
               <div className='info-box-content'>
                 <span className='info-box-text'>Document</span>
-                <span className='info-box-number'>90</span>
+                <span className='info-box-number'>{ sumary.document }</span>
               </div>
             </div>
           </div>
@@ -36,7 +34,7 @@ class HomeContainer extends Component {
               </span>
               <div className='info-box-content'>
                 <span className='info-box-text'>Category</span>
-                <span className='info-box-number'>90</span>
+                <span className='info-box-number'>{ sumary.category }</span>
               </div>
             </div>
           </div>
@@ -48,11 +46,12 @@ class HomeContainer extends Component {
 
               <div className='info-box-content'>
                 <span className='info-box-text'>Member</span>
-                <span className='info-box-number'>90</span>
+                <span className='info-box-number'>{ sumary.member }</span>
               </div>
             </div>
           </div>
         </div>
+        }
       </div>
     )
   }
@@ -60,12 +59,13 @@ class HomeContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    documents: state.doc.list
+    sumary: state.home.sumary
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    getSumary: () => dispatch(getSumary())
   }
 }
 

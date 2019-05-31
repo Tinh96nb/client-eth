@@ -38,7 +38,7 @@ class MemberContainer extends Component {
             <h5 className='pull-left'>Manager member</h5>
           </Card.Header>
         </Card>
-        <Table striped bordered hover size='sm'>
+        <Table striped bordered hover size='sm' className='admin-mem'>
           <thead>
             <tr>
               <th style={{ width: '50px' }}>#</th>
