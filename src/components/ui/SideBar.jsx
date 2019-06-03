@@ -5,6 +5,8 @@ import { asideMenu, asideMenuAdmin } from 'common/helpers/const'
 
 export default class Aside extends React.Component {
   render () {
+    const { profile } = this.props
+
     const currentLink = window.location.pathname
 
     return (
@@ -26,21 +28,26 @@ export default class Aside extends React.Component {
                 </Link>
               )
             })}
-            <div className='title-nav'>
+            {profile && profile.role === 'admin' &&
+            <>
+              <div className='title-nav'>
               Admin
-            </div>
-            {asideMenuAdmin.map((item, i) => {
-              return (
-                <Link
-                  key={i}
-                  className={currentLink === item.link ? 'active nav-link' : 'nav-link'}
-                  to={item.link}
-                >
-                  <i className={`fa ${item.icon}`} aria-hidden='true' /> {item.name}
-                </Link>
-              )
-            })}
+              </div>
+              {asideMenuAdmin.map((item, i) => {
+                return (
+                  <Link
+                    key={i}
+                    className={currentLink === item.link ? 'active nav-link' : 'nav-link'}
+                    to={item.link}
+                  >
+                    <i className={`fa ${item.icon}`} aria-hidden='true' /> {item.name}
+                  </Link>
+                )
+              })}
+            </>
+            }
           </Nav>
+
         </div>
       </div>
     )

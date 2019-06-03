@@ -11,10 +11,8 @@ class HomeContainer extends Component {
     const { sumary } = this.props
     return (
       <div className='dashboard'>
-        - check status member moi cho vao, xoa token, prop text vao trang metamask
         - log activiti ngoai dashboard
         - search document
-        - bat request fail, notify
         {sumary && <div className='row'>
           <div className='col-md-4 col-sm-6 col-xs-12'>
             <div className='info-box'>

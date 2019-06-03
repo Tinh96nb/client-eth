@@ -10,17 +10,25 @@ export default class MetaMask extends React.Component {
         <section id='intro' className='container'>
           <div id='logo-container'>
             <img width='200px' height='200px' src={iconMetaMask} />
-            {msg !== ''
+            <h1>MetaMask</h1>
+
+            {msg === 'login'
               ? <>
-                <p>{ msg }</p>
-                <button onClick={this.props.postLogin}>Login</button>
+                <h2>Login to app</h2>
+                <button
+                  type='button'
+                  className='btn btn-login'
+                  onClick={this.props.postLogin}
+                >
+                  Login
+                </button>
+                <p className='text-des'>Login to app using account from metamask</p>
               </>
               : <>
-                <h1>MetaMask</h1>
                 <h2>This site requires the Metamask plugin</h2>
                 <a href='https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn' id='main-install-button' className='cta' target='_blank'>Get Chrome Extension</a>
                 <p>
-                  <a href='https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn' className='download-link download-link-chrome' target='_blank'>Chrome</a>
+                  <a href='https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn' className='download-link download-link-chrome' target='_blank'>Chrome </a>
                   <a href='https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/' className='download-link download-link-firefox' target='_blank'>Firefox</a>
                   <a href='https://addons.opera.com/en/extensions/details/metamask/' className='download-link download-link-opera' target='_blank'>Opera</a>
                 </p>

@@ -29,6 +29,7 @@ export const fetchDocumentById = (params = {}) => {
 export const crateDocument = (params = {}, cb = null) => {
   return (dispatch, getState) => dispatch(requestAxios(request.crateDocument(params)))
     .then(response => {
+      if (response.payload) return null
       const currentList = getState().doc.list
       const newList = [...[response], ...currentList]
       dispatch({
@@ -42,6 +43,7 @@ export const crateDocument = (params = {}, cb = null) => {
 export const deleteDocument = (params = {}, cb = null) => {
   return (dispatch, getState) => dispatch(requestAxios(request.deleteDocumentById(params)))
     .then(response => {
+      if (response.payload) return null
       const currentList = getState().doc.list
       const newList = currentList.filter((row) => row.id !== response)
       dispatch({
@@ -55,6 +57,7 @@ export const deleteDocument = (params = {}, cb = null) => {
 export const updateDocument = (params = {}, cb = null) => {
   return (dispatch, getState) => dispatch(requestAxios(request.updateDocument(params)))
     .then(response => {
+      if (response.payload) return null
       const currentList = getState().doc.list
       const index = currentList.findIndex((row) => row.id === response.id)
       currentList[index] = response

@@ -69,6 +69,7 @@ export class App extends Component {
     return (
       <GatewayProvider>
         <Fragment>
+          { profile &&
           <CheckWeb3
             postLogin={this.props.postLogin}
             profile={profile}
@@ -78,7 +79,7 @@ export class App extends Component {
               <div className='flex-xl-nowrap row'>
                 <Router>
                   <Fragment>
-                    <SideBar />
+                    <SideBar profile={profile} />
                     <RightSideBar categories={this.props.categories} />
                     <div className='main col-xl-8 col-md-9 col-12'>
                       <Switch>
@@ -103,7 +104,7 @@ export class App extends Component {
               </div>
             </div>
           </CheckWeb3>
-
+          }
           <GatewayDest name='confirm' />
 
           {this.state.alertError && (

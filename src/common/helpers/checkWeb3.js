@@ -2,6 +2,7 @@ import * as React from 'react'
 import { getWeb3 } from './getWeb3'
 import MetaMask from 'components/ui/MetaMask'
 import { set } from 'common/helpers/session'
+import { createToast } from 'common/helpers/toast'
 
 export default class CheckWeb3 extends React.Component {
   constructor () {
@@ -17,8 +18,12 @@ export default class CheckWeb3 extends React.Component {
 
   postLogin () {
     const response = (res) => {
+      if (!res.token) {
+        return
+      }
       set(res.token)
-      // window.location.href = '/'
+      createToast({ type: 'success', message: 'Login success!' })
+      window.location.href = '/'
     }
 
     this.props.postLogin({
@@ -36,7 +41,7 @@ export default class CheckWeb3 extends React.Component {
       this.setState({ address: web3.givenProvider.selectedAddress })
       if (window.location.pathname === '/auth') {
         if (this.props.profile) window.location.href = '/'
-        this.setState({ isInjectWeb3: false, msg: 'Please login' })
+        this.setState({ isInjectWeb3: false, msg: 'login' })
         return
       }
       this.setState({ isInjectWeb3: true, address: web3.givenProvider.selectedAddress })

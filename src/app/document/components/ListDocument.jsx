@@ -22,7 +22,7 @@ export default class ListDoc extends Component {
           </tr>
         </thead>
         <tbody>
-          {documents.map((doc, index) => {
+          {documents.length > 0 ? documents.map((doc, index) => {
             return (
               <tr key={index}>
                 <td>{doc.id}</td>
@@ -34,18 +34,19 @@ export default class ListDoc extends Component {
                 <td>{doc.content_hash}</td>
                 <td>{doc.owner}</td>
                 <td >
-                  <Badge
+                  {statusDocument[doc.status] && <Badge
                     pill
                     variant={statusDocument[doc.status].class}
                   >
                     {statusDocument[doc.status].status}
                   </Badge>
+                  }
                 </td>
                 <td>{doc.category_name}</td>
                 <td>{convertTimeStampToString(doc.created_at)}</td>
               </tr>
             )
-          })}
+          }) : null}
         </tbody>
       </Table>
     )
