@@ -1,4 +1,5 @@
 import * as request from 'api/request_api'
+import { requestAxios } from 'app/apiReducer'
 
 const FETCH_USER_ME = 'user/FETCH_USER_ME'
 const FETCH_CATEGORY = 'user/FETCH_CATEGORY'
@@ -9,21 +10,18 @@ const initialState = {
 }
 
 export function postLogin (parameters, cb) {
-  return request.postLogin(parameters)
+  return (dispatch) => dispatch(requestAxios(request.postLogin(parameters)))
     .then((response) => {
-      return cb(response.data)
-    })
-    .catch((err) => {
-      console.log('acc not found', err)
+      return cb(response)
     })
 }
 
 export function getUserMe () {
-  return (dispatch) => request.postUserMe()
+  return (dispatch) => dispatch(requestAxios(request.postUserMe()))
     .then((response) => {
       dispatch({
         type: FETCH_USER_ME,
-        payload: { me: response.data.profile, authChecked: true }
+        payload: { me: response.profile, authChecked: true }
       })
     })
 }

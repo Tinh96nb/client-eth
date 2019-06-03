@@ -1,17 +1,16 @@
 import * as request from 'api/request_api'
+import { requestAxios } from 'app/apiReducer'
 
 const SUMARY = 'home/SUMARY'
 
 export const getSumary = () => {
-  return (dispatch) => {
-    return request.getSumary()
-      .then(response => {
-        dispatch({
-          type: SUMARY,
-          payload: { sumary: response.data }
-        })
+  return (dispatch) => dispatch(requestAxios(request.getSumary()))
+    .then(response => {
+      dispatch({
+        type: SUMARY,
+        payload: { sumary: response }
       })
-  }
+    })
 }
 
 const initState = {
