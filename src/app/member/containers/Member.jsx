@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { Table, Badge, Card } from 'react-bootstrap'
 import { statusMember } from 'common/helpers/const'
 import { fetchListMember } from '../reducer'
+import { Link } from 'react-router-dom'
+import { fetchDocument } from 'app/document/reducer'
 
 class MemberContainer extends Component {
   constructor (props) {
@@ -41,7 +42,10 @@ class MemberContainer extends Component {
                 <tr key={index}>
                   <td>{mem.id}</td>
                   <td>
-                    <Link to={`/document?member=${mem.address}`}>
+                    <Link
+                      to={`/document?owner=${mem.address}`}
+                      onClick={() => this.props.fetchDocument({ owner: mem.address })}
+                    >
                       {mem.address}
                     </Link>
                   </td>
@@ -77,7 +81,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchListMember: (params) => dispatch(fetchListMember(params))
+    fetchListMember: (params) => dispatch(fetchListMember(params)),
+    fetchDocument: (params) => dispatch(fetchDocument(params))
   }
 }
 

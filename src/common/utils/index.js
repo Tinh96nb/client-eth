@@ -6,6 +6,16 @@ export function convertTimeStampToString (timestamp) {
   return date.toFormat('yyyy-LL-dd T')
 }
 
+export const encodeQueryData = (data) => {
+  const ret = []
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      ret.push(`${key}=${data[key]}`)
+    }
+  }
+  return ret.join('&')
+}
+
 export const getUrlParams = () => {
   const search = window.location.search
   if (!search.trim().length) return {}

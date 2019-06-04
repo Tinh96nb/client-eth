@@ -126,10 +126,14 @@ export const getListDocument = function (parameters = {}) {
     queryParameters['name'] = parameters['name']
   }
   if (parameters['category_id'] !== undefined) {
-    queryParameters['categoryId'] = parameters['category_id']
+    queryParameters['category_id'] = parameters['category_id']
   }
   if (parameters['owner'] !== undefined) {
     queryParameters['owner'] = parameters['owner']
+  }
+
+  if (parameters['status'] !== undefined) {
+    queryParameters['status'] = parameters['status']
   }
 
   queryParameters = mergeQueryParams(parameters, queryParameters)

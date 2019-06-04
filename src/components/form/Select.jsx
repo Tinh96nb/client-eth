@@ -12,15 +12,15 @@ const Select = props => {
 
   return (
     <div className='form-group'>
-      <label> {title} </label>
+      {title && <label> {title} </label>}
       <select
         id={name}
         name={name}
-        defaultValue={value}
+        defaultValue={parseInt(value, 10)}
         onChange={handleChange}
         className='form-control'
       >
-        <option disabled>
+        <option value=''>
           {placeholder}
         </option>
         {options.map(option => {

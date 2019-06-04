@@ -50,6 +50,7 @@ export default class ModalAdd extends Component {
       })
     )
   }
+
   handleFormSubmit (e) {
     e.preventDefault()
     const doc = this.state.document

@@ -10,6 +10,8 @@ import {
   createMember
 } from '../reducer'
 
+import { fetchDocument } from 'app/document/reducer'
+
 class MemberContainer extends Component {
   constructor (props) {
     super(props)
@@ -54,7 +56,10 @@ class MemberContainer extends Component {
                 <tr key={index}>
                   <td>{mem.id}</td>
                   <td>
-                    <Link to={`/document?member=${mem.address}`}>
+                    <Link
+                      to={`/document?owner=${mem.address}`}
+                      onClick={() => this.props.fetchDocument({ owner: mem.address })}
+                    >
                       {mem.address}
                     </Link>
                   </td>
@@ -102,6 +107,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchListMember: (params) => dispatch(fetchListMember(params)),
+    fetchDocument: (params) => dispatch(fetchDocument(params)),
     updateStatusMember: (params, cb) => dispatch(updateStatusMember(params, cb)),
     createMember: (params, cb) => dispatch(createMember(params, cb))
   }

@@ -11,7 +11,7 @@ export const fetchDocument = (params = {}) => {
     .then(response => {
       dispatch({
         type: FETCH_LIST_DOC,
-        payload: { list: response }
+        payload: { list: response, query: params || null }
       })
     })
 }
@@ -71,7 +71,8 @@ export const updateDocument = (params = {}, cb = null) => {
 
 const initState = {
   list: [],
-  one: {}
+  one: {},
+  query: null
 }
 
 export const docReducer = (state = initState, action) => {

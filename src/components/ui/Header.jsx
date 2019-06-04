@@ -25,8 +25,8 @@ export default class Header extends Component {
         <Navbar.Collapse className='justify-content-end'>
           <Navbar.Text className='ml-auto pr-md-5 navbar-nav'>
             Signed in as: <a href='/profile'>
-              {this.convertTextAddress(profile.address)}
-            </a>{'  '}
+              {profile && this.convertTextAddress(profile.address)}
+            </a>{' '}
             <Button
               variant='outline-light'
               size='sm'

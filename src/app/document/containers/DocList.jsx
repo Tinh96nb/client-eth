@@ -7,6 +7,8 @@ import {
 import { Button, Card } from 'react-bootstrap'
 import ModalAdd from '../components/ModalAdd'
 import ListDoc from '../components/ListDocument'
+import FormSearch from '../components/SearchForm'
+import { getUrlParams } from 'common/utils'
 
 class DocContainer extends Component {
   constructor (props) {
@@ -17,7 +19,13 @@ class DocContainer extends Component {
   }
 
   componentWillMount () {
-    this.props.fetchDocument()
+    const queryParams = getUrlParams()
+    Object.keys(queryParams).forEach((key) => {
+      if (typeof queryParams[key] === 'string') {
+        queryParams[key] = queryParams[key].split(',')[0]
+      }
+    })
+    this.props.fetchDocument(queryParams)
   }
   render () {
     return (
@@ -35,6 +43,14 @@ class DocContainer extends Component {
             </Button>
           </Card.Header>
         </Card>
+
+        <FormSearch
+          query={this.props.query}
+          categories={this.props.categories}
+          fetchDocument={this.props.fetchDocument}
+          router={this.props.history}
+        />
+
         <ListDoc
           documents={this.props.documents}
           deleteDocument={this.props.deleteDocument}
@@ -55,6 +71,7 @@ class DocContainer extends Component {
 const mapStateToProps = state => {
   return {
     documents: state.doc.list,
+    query: state.doc.query,
     categories: state.admin.categories
   }
 }

@@ -69,7 +69,6 @@ export class App extends Component {
     return (
       <GatewayProvider>
         <Fragment>
-          { profile &&
           <CheckWeb3
             postLogin={this.props.postLogin}
             profile={profile}
@@ -104,7 +103,6 @@ export class App extends Component {
               </div>
             </div>
           </CheckWeb3>
-          }
           <GatewayDest name='confirm' />
 
           {this.state.alertError && (

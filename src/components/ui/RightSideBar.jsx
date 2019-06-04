@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
-
 export default class RightSideBar extends React.Component {
   constructor (props) {
     super(props)
@@ -22,9 +20,9 @@ export default class RightSideBar extends React.Component {
               {categories.map(cate => {
                 return (
                   <li level='3' key={cate.id}>
-                    <Link to={`/document?category=${cate.name}`}>
+                    <a href={`/document?category_id=${cate.id}`}>
                       {cate.name} ({cate.num_doc})
-                    </Link>
+                    </a>
                   </li>)
               })}
             </ul>

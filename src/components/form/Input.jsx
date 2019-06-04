@@ -11,9 +11,10 @@ const Input = props => {
   } = props
   return (
     <div className='form-group'>
-      <label className='form-label'>
+      {title && <label className='form-label'>
         {title}
       </label>
+      }
       <input
         className='form-control'
         id={name}
