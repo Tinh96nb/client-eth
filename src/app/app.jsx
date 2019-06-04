@@ -76,30 +76,33 @@ export class App extends Component {
             <Header profile={profile} loading={api.loadings} />
             <div className='container-fluid'>
               <div className='flex-xl-nowrap row'>
-                <Router>
-                  <Fragment>
-                    <SideBar profile={profile} />
-                    <RightSideBar categories={this.props.categories} />
-                    <div className='main col-xl-8 col-md-9 col-12'>
-                      <Switch>
-                        <Route path='/' exact component={Home} />
-                        <Route path='/document/:id' component={DocumentDetail} />
-                        <Route path='/document' component={DocumentList} />
-                        <Route path='/member' component={Member} />
-                        <Route path='/profile' component={Profile} />
-                        {profile && profile.role === 'admin'
-                          ? <Fragment>
-                            <Route path='/admin/category' component={CategoryManager} />
-                            <Route path='/admin/document' component={DocManager} />
-                            <Route path='/admin/member' component={MemManager} />
-                          </Fragment>
-                          : null
-                        }
-                        <Route component={() => (<p>Not Found</p>)} />
-                      </Switch>
-                    </div>
-                  </Fragment>
-                </Router>
+                {profile
+                  ? <Router>
+                    <Fragment>
+                      <SideBar profile={profile} />
+                      <RightSideBar categories={this.props.categories} />
+                      <div className='main col-xl-8 col-md-9 col-12'>
+                        <Switch>
+                          <Route path='/' exact component={Home} />
+                          <Route path='/document/:id' component={DocumentDetail} />
+                          <Route path='/document' component={DocumentList} />
+                          <Route path='/member' component={Member} />
+                          <Route path='/profile' component={Profile} />
+                          {profile && profile.role === 'admin'
+                            ? <Fragment>
+                              <Route path='/admin/category' component={CategoryManager} />
+                              <Route path='/admin/document' component={DocManager} />
+                              <Route path='/admin/member' component={MemManager} />
+                            </Fragment>
+                            : null
+                          }
+                          <Route component={() => (<p>Not Found</p>)} />
+                        </Switch>
+                      </div>
+                    </Fragment>
+                  </Router>
+                  : null
+                }
               </div>
             </div>
           </CheckWeb3>

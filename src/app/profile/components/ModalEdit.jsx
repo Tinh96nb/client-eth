@@ -75,13 +75,17 @@ export default class ModalEdit extends Component {
       }
     })
   }
+  componentWillReceiveProps (props) {
+    if (props.document) {
+      this.setState({ document: props.document })
+    }
+  }
 
   render () {
     return (
       <Modal
         show={this.props.isShowModal}
         onHide={this.handleClose}
-        onShow={() => this.setState({ document: this.props.document })}
       >
         <form onSubmit={this.handleFormSubmit}>
           <Modal.Header closeButton>
@@ -99,7 +103,7 @@ export default class ModalEdit extends Component {
             />
             <Select
               title={'Category'}
-              name={'category'}
+              name={'category_id'}
               options={this.props.categories}
               value={this.state.document.category_id}
               placeholder={'Select category'}

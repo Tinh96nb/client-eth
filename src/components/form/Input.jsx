@@ -6,6 +6,7 @@ const Input = props => {
     name,
     type,
     value,
+    isRequired = false,
     handleChange,
     placeholder
   } = props
@@ -15,6 +16,7 @@ const Input = props => {
         {title}
       </label>
       }
+      {isRequired && <span className='text-danger'> *</span>}
       <input
         className='form-control'
         id={name}

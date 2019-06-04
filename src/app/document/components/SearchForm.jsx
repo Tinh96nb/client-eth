@@ -42,6 +42,8 @@ export default class FormSearch extends Component {
         category_id: ''
       }
     })
+    this.props.router.push('/document')
+    this.props.fetchDocument()
   }
 
   handleSearch (e) {
@@ -72,7 +74,7 @@ export default class FormSearch extends Component {
               <Input
                 type={'text'}
                 name={'name'}
-                value={this.state.document.name}
+                value={this.state.document.name || ''}
                 placeholder={'Enter name'}
                 handleChange={this.handleInput}
               />
@@ -81,7 +83,7 @@ export default class FormSearch extends Component {
               <Input
                 type={'text'}
                 name={'owner'}
-                value={this.state.document.owner}
+                value={this.state.document.owner || ''}
                 placeholder={'Address owner'}
                 handleChange={this.handleInput}
               />
@@ -114,7 +116,14 @@ export default class FormSearch extends Component {
         </div>
         <div className='col-md-1'>
           <button type='submit' className='btn btn-primary btn-sm'>
-            Search
+            <i className='fa fa-search' aria-hidden='true' />
+          </button>
+          <button
+            type='button'
+            className='btn btn-primary btn-sm'
+            onClick={this.handleReset}
+          >
+            <i className='fa fa-repeat' aria-hidden='true' />
           </button>
         </div>
       </form>

@@ -107,6 +107,7 @@ export default class ModalAdd extends Component {
                 type={'text'}
                 title={'Document Name'}
                 name={'name'}
+                isRequired
                 value={this.state.document.name}
                 placeholder={'Enter name'}
                 handleChange={this.handleInput}

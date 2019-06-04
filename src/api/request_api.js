@@ -259,8 +259,8 @@ export const crateDocument = function (parameters = {}) {
   if (parameters['name'] !== undefined) {
     form['name'] = parameters['name']
   }
-  if (parameters['category_id'] !== undefined) {
-    form['category'] = parameters['category_id']
+  if (parameters['category'] !== undefined) {
+    form['category'] = parameters['category']
   }
   if (parameters['size'] !== undefined) {
     form['size'] = parameters['size']
@@ -298,8 +298,8 @@ export const updateDocument = function (parameters = {}) {
   if (parameters['file_content'] !== undefined) {
     form['file_content'] = parameters['file_content']
   }
-  if (parameters['category'] !== undefined) {
-    form['category'] = parameters['category']
+  if (parameters['category_id'] !== undefined) {
+    form['category'] = parameters['category_id']
   }
   if (parameters['size'] !== undefined) {
     form['size'] = parameters['size']

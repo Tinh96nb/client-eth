@@ -4,7 +4,7 @@ const Select = props => {
   const {
     title,
     name,
-    value,
+    value = '',
     handleChange,
     placeholder,
     options = []
@@ -16,7 +16,7 @@ const Select = props => {
       <select
         id={name}
         name={name}
-        defaultValue={parseInt(value, 10)}
+        value={value}
         onChange={handleChange}
         className='form-control'
       >

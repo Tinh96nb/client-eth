@@ -12,7 +12,6 @@ class HomeContainer extends Component {
     return (
       <div className='dashboard'>
         - log activiti ngoai dashboard
-        - search document
         {sumary && <div className='row'>
           <div className='col-md-4 col-sm-6 col-xs-12'>
             <div className='info-box'>

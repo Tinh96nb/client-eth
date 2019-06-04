@@ -105,6 +105,7 @@ export default class ModalAdd extends Component {
               <UploadFile getInfo={this.infoFileUpload} isRequired />
               <Input
                 type={'text'}
+                isRequired
                 title={'Document Name'}
                 name={'name'}
                 value={this.state.document.name}
