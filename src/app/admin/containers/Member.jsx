@@ -45,9 +45,9 @@ class MemberContainer extends Component {
             <tr>
               <th style={{ width: '50px' }}>#</th>
               <th>Address</th>
-              <th>Balance</th>
-              <th style={{ width: '80px' }}>N.Doc</th>
-              <th style={{ width: '80px' }}>Status</th>
+              <th style={{ width: '20%' }}>Balance</th>
+              <th style={{ width: '10%' }}>N.Doc</th>
+              <th style={{ width: '13%', textAlign: 'center' }}>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -69,7 +69,7 @@ class MemberContainer extends Component {
                       {mem.num_doc}
                     </Badge>
                   </td>
-                  <td>
+                  <td style={{ textAlign: ' center' }} >
                     <OverlayTrigger
                       placement={'right'}
                       overlay={<Tooltip>

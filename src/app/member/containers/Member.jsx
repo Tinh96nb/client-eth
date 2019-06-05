@@ -31,9 +31,9 @@ class MemberContainer extends Component {
             <tr>
               <th style={{ width: '50px' }}>#</th>
               <th>Address</th>
-              <th>Balance</th>
-              <th style={{ width: '80px' }}>Status</th>
-              <th style={{ width: '80px' }}>N.Doc</th>
+              <th style={{ width: '20%' }}>Balance</th>
+              <th style={{ width: '10%' }}>N.Doc</th>
+              <th style={{ width: '13%', textAlign: 'center' }}>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -50,17 +50,17 @@ class MemberContainer extends Component {
                     </Link>
                   </td>
                   <td>{mem.balance} ether</td>
-                  <td>
+                  <td style={{ textAlign: 'center' }}>
+                    <Badge pill variant='dark'>
+                      {mem.num_doc}
+                    </Badge>
+                  </td>
+                  <td style={{ textAlign: 'center' }}>
                     <Badge
                       pill
                       variant={statusMember[mem.status].class}
                     >
                       {statusMember[mem.status].status}
-                    </Badge>
-                  </td>
-                  <td style={{ textAlign: 'center' }}>
-                    <Badge pill variant='dark'>
-                      {mem.num_doc}
                     </Badge>
                   </td>
                 </tr>

@@ -122,9 +122,8 @@ export default class ListDoc extends Component {
             <th style={{ width: '50px' }}>#</th>
             <th>Name</th>
             <th>Hash Value</th>
-            <th>Owner</th>
             <th style={{ width: '90px' }}>Status</th>
-            <th>Category</th>
+            <th style={{ width: '120px' }}>Category</th>
             <th>Upload at</th>
             <th style={{ width: '90px' }} />
           </tr>
@@ -140,7 +139,6 @@ export default class ListDoc extends Component {
                   </Link>
                 </td>
                 <td>{doc.content_hash}</td>
-                <td>{doc.owner}</td>
                 <td>{this.renderStatus(doc.id, doc.status)}</td>
                 <td>{doc.category_name}</td>
                 <td>{convertTimeStampToString(doc.created_at)}</td>
