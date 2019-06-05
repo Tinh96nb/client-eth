@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getSumary } from '../reducer'
+import { Card, Table } from 'react-bootstrap'
+import { getSumary, getBlockchain } from '../reducer'
 
 class HomeContainer extends Component {
   componentWillMount () {
     this.props.getSumary()
+    this.props.getBlockchain()
   }
 
   render () {
-    const { sumary } = this.props
+    const { sumary, blocks, transactions } = this.props
     return (
       <div className='dashboard'>
-        - log activiti ngoai dashboard
         {sumary && <div className='row'>
           <div className='col-md-4 col-sm-6 col-xs-12'>
             <div className='info-box'>
@@ -49,6 +50,49 @@ class HomeContainer extends Component {
           </div>
         </div>
         }
+        <div className='row'>
+          <div className='col-md-6'>
+            <Card>
+              <Card.Header><h5 className='pull-left'>Latest Blocks</h5></Card.Header>
+              <Card.Body>
+                <Table striped hover size='sm'>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                    </tr>
+                  </thead>
+                  <tbody />
+                </Table>
+                {blocks.map(block => {
+                  return block.number
+                })}
+              </Card.Body>
+            </Card>
+          </div>
+          <div className='col-md-6'>
+            <Card>
+              <Card.Header><h5 className='pull-left'>Latest ransactions</h5></Card.Header>
+              <Card.Body>
+                <Table striped hover size='sm'>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                    </tr>
+                  </thead>
+                  <tbody />
+                </Table>
+                {transactions.map(trans => {
+                  return trans.hash
+                })}
+              </Card.Body>
+            </Card>
+
+          </div>
+        </div>
       </div>
     )
   }
@@ -56,13 +100,16 @@ class HomeContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    sumary: state.home.sumary
+    sumary: state.home.sumary,
+    blocks: state.home.blocks,
+    transactions: state.home.transactions
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSumary: () => dispatch(getSumary())
+    getSumary: () => dispatch(getSumary()),
+    getBlockchain: () => dispatch(getBlockchain())
   }
 }
 

@@ -111,7 +111,7 @@ class DocDetailContainer extends Component {
               </li>
               <li>
                 <div className='title'><span>Gas used</span></div>
-                {document.transaction.gas_used} Wei
+                {document.transaction.gas_used} Gwei
               </li>
               <li>
                 <div className='title'><span>Created at</span></div>
