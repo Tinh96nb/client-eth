@@ -1,12 +1,108 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Table, Button } from 'react-bootstrap'
+import { Card, Table, Button, Modal } from 'react-bootstrap'
 import { getSumary, getBlockchain } from '../reducer'
-
+import { timeStampToString } from 'common/utils'
 class HomeContainer extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isShowModal: false,
+      dataBlock: null,
+      dataTrans: null
+    }
+  }
   componentWillMount () {
     this.props.getSumary()
     this.props.getBlockchain()
+  }
+
+  renderBlock () {
+    const blockInfo = this.state.dataBlock
+    return (
+      <ul className='info'>
+        <li>
+          <div className='title'>Number:</div>
+          {blockInfo.number}
+        </li>
+        <li>
+          <div className='title'>Timestamp:</div>
+          {timeStampToString(blockInfo.timestamp)}
+        </li>
+        <li>
+          <div className='title'>Transactions:</div>
+          {blockInfo.transactions.length}
+        </li>
+        <li>
+          <div className='title'>Mined by:</div>
+          {blockInfo.miner}
+        </li>
+        <li>
+          <div className='title'>Total Difficulty:</div>
+          {blockInfo.totalDifficulty}
+        </li>
+        <li>
+          <div className='title'>Size:</div>
+          {blockInfo.size} bytes
+        </li>
+        <li>
+          <div className='title'>Gas Used:</div>
+          {blockInfo.gasUsed}
+        </li>
+        <li>
+          <div className='title'>Gas Limit:</div>
+          {blockInfo.gasLimit}
+        </li>
+        <li>
+          <div className='title'>Hash:</div>
+          {blockInfo.hash}
+        </li>
+        <li>
+          <div className='title'>Parent Hash:</div>
+          {blockInfo.parentHash}
+        </li>
+      </ul>
+    )
+  }
+
+  renderTrans () {
+    const trans = this.state.dataTrans
+    return (
+      <ul className='info'>
+        <li>
+          <div className='title'>Hash:</div>
+          {trans.hash}
+        </li>
+        <li>
+          <div className='title'>Block:</div>
+          {trans.blockHash}
+        </li>
+        <li>
+          <div className='title'>From:</div>
+          {trans.from}
+        </li>
+        <li>
+          <div className='title'>To:</div>
+          {trans.to} bytes
+        </li>
+        <li>
+          <div className='title'>Value:</div>
+          {trans.value} wei
+        </li>
+        <li>
+          <div className='title'>Gas:</div>
+          {trans.gas}
+        </li>
+        <li>
+          <div className='title'>Gas Price:</div>
+          {trans.gasPrice}
+        </li>
+        <li>
+          <div className='title'>Nonce:</div>
+          {trans.nonce}
+        </li>
+      </ul>
+    )
   }
 
   render () {
@@ -51,12 +147,12 @@ class HomeContainer extends Component {
           <div className='col-md-3 col-sm-6 col-xs-12'>
             <div className='info-box'>
               <span className='info-box-icon bg-danger'>
-                <i className='fa fa-codepen' aria-hidden='true' />
+                <i className='fa fa-exchange' aria-hidden='true' />
               </span>
 
               <div className='info-box-content'>
-                <span className='info-box-text'>Block</span>
-                <span className='info-box-number'>{ blocks.length }</span>
+                <span className='info-box-text'>Transactions</span>
+                <span className='info-box-number'>{ transactions.length }</span>
               </div>
             </div>
           </div>
@@ -87,7 +183,10 @@ class HomeContainer extends Component {
                             <Button
                               variant='primary'
                               size='sm'
-                              onClick={(e) => this.handleShowBlock(block)}
+                              onClick={() => this.setState({
+                                isShowModal: true,
+                                dataBlock: block
+                              })}
                             >
                               <i className='fa fa-eye' aria-hidden='true' />
                             </Button></td>
@@ -128,7 +227,10 @@ class HomeContainer extends Component {
                             <Button
                               variant='primary'
                               size='sm'
-                              onClick={(e) => this.handleShowTrans(trans)}
+                              onClick={() => this.setState({
+                                isShowModal: true,
+                                dataTrans: trans
+                              })}
                             >
                               <i className='fa fa-eye' aria-hidden='true' />
                             </Button></td>
@@ -142,6 +244,26 @@ class HomeContainer extends Component {
 
           </div>
         </div>
+        <Modal
+          size='lg'
+          show={this.state.isShowModal}
+          onHide={() => this.setState({
+            isShowModal: false,
+            dataBlock: null,
+            dataTrans: null
+          })}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
+              {this.state.dataBlock && 'Block Detail'}
+              {this.state.dataTrans && 'Transaction'}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {this.state.dataBlock && this.renderBlock()}
+            {this.state.dataTrans && this.renderTrans()}
+          </Modal.Body>
+        </Modal>
       </div>
     )
   }
